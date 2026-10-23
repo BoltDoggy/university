@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CoreCoursesApp from '../components/coreCourses/CoreCoursesApp';
+import { data, entryTotal, exTotal } from '../components/coreCourses/shared';
+import '../styles/core-courses-base.css';
+import '../styles/core-courses-rank.css';
+import '../styles/core-courses-panel.css';
+
+const totalMajors = data.classes.reduce((s, c) => s + c.majors.length, 0);
+const totalExamples = data.classes.reduce((s, c) => s + exTotal(c), 0);
+const totalEntries = data.classes.reduce((s, c) => s + entryTotal(c), 0);
+---
+
+<Layout title="本科专业类核心课程示例（国标）· 可视化">
+	<div class="cc-page">
+		<header class="hero">
+			<p class="kicker">教育部 · 《普通高等学校本科专业类教学质量国家标准》2018</p>
+			<h1>本科专业类核心课程示例</h1>
+			<p class="sub">
+				电子信息类与计算机类的知识体系与核心课程体系示例：统计每门课程被多少个专业、多少份示例共同采用，找出专业类内真正的「公共核心课」，并可下钻每个专业的完整课程清单。
+			</p>
+			<ul class="stat-chips">
+				<li><b>{data.classes.length}</b><span>专业类</span></li>
+				<li><b>{totalMajors}</b><span>专业</span></li>
+				<li><b>{totalExamples}</b><span>课程示例</span></li>
+				<li><b>{totalEntries}</b><span>课程条目</span></li>
+			</ul>
+		</header>
+
+		<CoreCoursesApp client:visible />
+
+		<footer class="foot">
+			数据来源：{data.source}。{data.method}。示例清单为原书建议方案，各高校实际开设课程由培养方案自主确定。
+		</footer>
+	</div>
+</Layout>

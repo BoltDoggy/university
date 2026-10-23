@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AiSeries from '../../components/courses/AiSeries.astro';
+import DataAnchor from '../../components/courses/DataAnchor.astro';
+import CourseContent from '../../components/courses/CourseContent.astro';
+import { agent } from '../../components/agent/content';
+import '../../styles/course-base.css';
+import '../../styles/course-content.css';
+import '../../styles/course-series.css';
+---
+
+<Layout title="大模型与智能体 · 课程介绍">
+	<div class="crs-page">
+		<header class="hero">
+			<p class="kicker">人工智能课程生态 · 进阶系列 · <a href="/courses/ai/">人工智能</a></p>
+			<h1>大模型与智能体<span class="en">LLMs and Agents</span></h1>
+			<p class="sub">
+				以大模型为引擎构建自主完成任务的 AI 系统：提示工程、RAG、工具调用、规划记忆与多智能体协作。
+				智能体热潮（AutoGPT 2023、MCP 2024）发生在国标发布五年之后——这是本系列中最年轻的课程。
+			</p>
+			<nav class="toc" aria-label="页面导航">
+				<a href="#anchor">数据锚点</a>
+				<a href="#intro">内容模块</a>
+				<a href="#path">先修与后续</a>
+				<a href="#books">教材与实验</a>
+			</nav>
+			<AiSeries current="大模型与智能体" />
+		</header>
+
+		<DataAnchor note="「智能体」在 30 份国标课程示例与知识领域中零出现——国标发布于 2018 年 1 月，AutoGPT 引爆智能体热潮是 2023 年，MCP 协议则要到 2024 年。它比「大模型技术」更年轻：如果说大模型课讲「模型本身」，这门课讲的是「用模型造系统」。" />
+		<CourseContent {...agent} />
+
+		<footer class="foot">
+			本页数据锚点来自《普通高等学校本科专业类教学质量国家标准》（2018）附录与《普通高等学校本科专业目录（2026 年）》；
+			内容模块、先修后续与教材部分为常见教学体系整理，不来自国标。各高校实际课程设置以本校培养方案为准。
+		</footer>
+	</div>
+</Layout>

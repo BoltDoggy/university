@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AiSeries from '../../components/courses/AiSeries.astro';
+import DataAnchor from '../../components/courses/DataAnchor.astro';
+import CourseContent from '../../components/courses/CourseContent.astro';
+import { decision } from '../../components/decision/content';
+import '../../styles/course-base.css';
+import '../../styles/course-content.css';
+import '../../styles/course-series.css';
+---
+
+<Layout title="自动决策系统 · 课程介绍">
+	<div class="crs-page">
+		<header class="hero">
+			<p class="kicker">人工智能课程生态 · 进阶系列 · <a href="/courses/ai/">人工智能</a></p>
+			<h1>自动决策系统<span class="en">Autonomous Decision Systems</span></h1>
+			<p class="sub">
+				让机器在真实环境中自动做决策的系统：序贯决策形式化、强化学习与运筹优化，
+				到推荐、调度、定价、控制的工业落地，再到博弈与人机混合决策——「决策智能」的工程形态。
+			</p>
+			<nav class="toc" aria-label="页面导航">
+				<a href="#anchor">数据锚点</a>
+				<a href="#intro">内容模块</a>
+				<a href="#path">先修与后续</a>
+				<a href="#books">教材与实验</a>
+			</nav>
+			<AiSeries current="自动决策系统" />
+		</header>
+
+		<DataAnchor note="自动决策系统未出现在国标 30 份核心课程示例中。决策智能横跨强化学习、运筹优化与控制论，2018 年主要以研究生方向课存在；随着强化学习落地（推荐、控制、RLHF）与运筹优化普及，它正在沉淀为本科高年级的系统课。" />
+		<CourseContent {...decision} />
+
+		<footer class="foot">
+			本页数据锚点来自《普通高等学校本科专业类教学质量国家标准》（2018）附录与《普通高等学校本科专业目录（2026 年）》；
+			内容模块、先修后续与教材部分为常见教学体系整理，不来自国标。各高校实际课程设置以本校培养方案为准。
+		</footer>
+	</div>
+</Layout>

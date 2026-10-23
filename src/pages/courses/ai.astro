@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AiStandard from '../../components/ai/AiStandard.astro';
+import AiIntro from '../../components/ai/AiIntro.astro';
+import AiSeries from '../../components/courses/AiSeries.astro';
+import majorsCatalog from '../../data/majors-2026.json';
+import '../../styles/course-base.css';
+import '../../styles/course-content.css';
+import '../../styles/course-series.css';
+
+let smartCount = 0;
+for (const cat of majorsCatalog.categories) {
+	for (const cls of cat.classes ?? []) {
+		for (const m of cls.majors) {
+			if (m.name.includes('智能')) smartCount++;
+		}
+	}
+}
+---
+
+<Layout title="人工智能 · 课程介绍">
+	<div class="crs-page">
+		<header class="hero">
+			<p class="kicker">计算机类（0809）· 专业知识课程 · <a href="/core-courses/">核心课程可视化</a></p>
+			<h1>人工智能<span class="en">Artificial Intelligence</span></h1>
+			<p class="sub">
+				国标课程示例中它是计算机科学与技术专业的一份方向课（48 学时），对应「智能技术」知识领域；
+				而在《专业目录》里，「人工智能」已成长为独立专业，并带动全目录 {smartCount} 个智能类特设专业——
+				从一门课到一门学科的生长样本。
+			</p>
+			<nav class="toc" aria-label="页面导航">
+				<a href="#standard">国标定位</a>
+				<a href="#intro">内容模块</a>
+				<a href="#path">先修与后续</a>
+				<a href="#books">教材与实验</a>
+			</nav>
+			<AiSeries current="人工智能" />
+		</header>
+
+		<AiStandard />
+		<AiIntro />
+
+		<footer class="foot">
+			国标数据来源：《普通高等学校本科专业类教学质量国家标准》（高等教育出版社 2018）附录与《普通高等学校本科专业目录（2026 年）》；
+			内容模块、先修后续与教材部分为常见教学体系整理，不来自国标。各高校实际课程设置以本校培养方案为准。
+		</footer>
+	</div>
+</Layout>

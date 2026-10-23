@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AiSeries from '../../components/courses/AiSeries.astro';
+import DataAnchor from '../../components/courses/DataAnchor.astro';
+import CourseContent from '../../components/courses/CourseContent.astro';
+import { dl } from '../../components/dl/content';
+import '../../styles/course-base.css';
+import '../../styles/course-content.css';
+import '../../styles/course-series.css';
+---
+
+<Layout title="深度学习 · 课程介绍">
+	<div class="crs-page">
+		<header class="hero">
+			<p class="kicker">人工智能课程生态 · 进阶系列 · <a href="/courses/ai/">人工智能</a></p>
+			<h1>深度学习<span class="en">Deep Learning</span></h1>
+			<p class="sub">
+				驱动本轮 AI 浪潮的技术内核：多层感知机、卷积网络、序列模型、Transformer 与预训练，
+				再到生成模型与部署效率。国标（2018 年 1 月发布）编制时深度学习刚进入本科视野，故未单列——详见下方数据锚点。
+			</p>
+			<nav class="toc" aria-label="页面导航">
+				<a href="#anchor">数据锚点</a>
+				<a href="#intro">内容模块</a>
+				<a href="#path">先修与后续</a>
+				<a href="#books">教材与实验</a>
+			</nav>
+			<AiSeries current="深度学习" />
+		</header>
+
+		<DataAnchor note="深度学习未出现在国标 30 份核心课程示例中：AlexNet（2012）引爆浪潮时标准正在编制，示例仅以「人工智能」一门课与「智能技术」知识领域收编相关内容。如今深度学习已是人工智能类专业当之无愧的核心课与科研入门标配。" />
+		<CourseContent {...dl} />
+
+		<footer class="foot">
+			本页数据锚点来自《普通高等学校本科专业类教学质量国家标准》（2018）附录与《普通高等学校本科专业目录（2026 年）》；
+			内容模块、先修后续与教材部分为常见教学体系整理，不来自国标。各高校实际课程设置以本校培养方案为准。
+		</footer>
+	</div>
+</Layout>

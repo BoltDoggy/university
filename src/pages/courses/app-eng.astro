@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AiSeries from '../../components/courses/AiSeries.astro';
+import DataAnchor from '../../components/courses/DataAnchor.astro';
+import CourseContent from '../../components/courses/CourseContent.astro';
+import { appEng } from '../../components/appeng/content';
+import '../../styles/course-base.css';
+import '../../styles/course-content.css';
+import '../../styles/course-series.css';
+---
+
+<Layout title="AI 应用工程 · 课程介绍">
+	<div class="crs-page">
+		<header class="hero">
+			<p class="kicker">人工智能课程生态 · 进阶系列 · <a href="/courses/ai/">人工智能</a></p>
+			<h1>AI 应用工程<span class="en">AI Engineering</span></h1>
+			<p class="sub">
+				把模型变成可靠产品的工程学科：需求与数据闭环、实验评测、服务化与 MLOps/LLMOps、可信合规——
+				覆盖从 notebook 原型到线上系统的全生命周期，AI 价值兑现的「最后一公里」。
+			</p>
+			<nav class="toc" aria-label="页面导航">
+				<a href="#anchor">数据锚点</a>
+				<a href="#intro">内容模块</a>
+				<a href="#path">先修与后续</a>
+				<a href="#books">教材与实验</a>
+			</nav>
+			<AiSeries current="AI 应用工程" />
+		</header>
+
+		<DataAnchor note="AI 应用工程未出现在国标 30 份核心课程示例中——2018 年「机器学习系统」作为课程概念刚在少数高校萌芽，MLOps 一词尚未流行，LLMOps 更是大模型之后的事。它由产业实践反哺教育而生，是工程学科与 AI 交叉的最新成员。" />
+		<CourseContent {...appEng} />
+
+		<footer class="foot">
+			本页数据锚点来自《普通高等学校本科专业类教学质量国家标准》（2018）附录与《普通高等学校本科专业目录（2026 年）》；
+			内容模块、先修后续与教材部分为常见教学体系整理，不来自国标。各高校实际课程设置以本校培养方案为准。
+		</footer>
+	</div>
+</Layout>

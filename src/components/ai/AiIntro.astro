@@ -1,0 +1,140 @@
+---
+/** 课程通识内容：简介、内容模块、先修后续、教材与实验（非国标数据，为常见教学体系整理） */
+import { aiRel } from '../courses/relations';
+
+const { prereq, parallel, follow } = aiRel;
+
+const modules: { icon: string; title: string; desc: string; topics: string[] }[] = [
+	{
+		icon: '🧭',
+		title: '搜索与问题求解',
+		desc: 'AI 的起点：如何让机器在庞大状态空间中“想出”解法，从迷宫到下棋到路径规划。',
+		topics: ['状态空间表示', '启发式搜索 A*', '对抗搜索与博弈', '约束满足问题'],
+	},
+	{
+		icon: '🧠',
+		title: '知识表示与推理',
+		desc: '把人类知识变成机器可计算的形式，并进行确定性与不确定性推理。',
+		topics: ['一阶逻辑与推理机', '知识图谱', '贝叶斯网络', '模糊推理'],
+	},
+	{
+		icon: '📈',
+		title: '机器学习',
+		desc: '从数据中自动获得规律的主流范式，现代 AI 的方法基础。',
+		topics: ['监督 / 无监督学习', '回归与决策树', '支持向量机', '集成学习与评估'],
+	},
+	{
+		icon: '🕸️',
+		title: '神经网络与深度学习',
+		desc: '多层网络 + 大数据 + 算力引爆的第三次浪潮，ChatGPT 时代的引擎。',
+		topics: ['多层感知机与反向传播', '卷积网络 CNN', '循环网络与 Transformer', '预训练大模型概览'],
+	},
+	{
+		icon: '💬',
+		title: '自然语言处理',
+		desc: '让机器理解与生成人类语言——从分词到大语言模型的跨越。',
+		topics: ['词向量与语言模型', '文本分类与信息抽取', '大语言模型', '提示工程与智能体'],
+	},
+	{
+		icon: '👁️',
+		title: '计算机视觉',
+		desc: '让机器“看懂”图像与视频：识别、检测、分割到生成。',
+		topics: ['图像特征与卷积', '目标检测', '图像分割', '扩散生成模型'],
+	},
+	{
+		icon: '🎮',
+		title: '强化学习',
+		desc: '在试错与奖励中学习决策，AlphaGo 与机器人控制的共同内核。',
+		topics: ['马尔可夫决策过程', 'Q-learning', '策略梯度', '多智能体'],
+	},
+	{
+		icon: '⚖️',
+		title: '伦理、安全与治理',
+		desc: '能力越大责任越大：偏见、可解释性、隐私与生成式 AI 治理已成必修话题。',
+		topics: ['算法偏见与公平', '可解释性 XAI', '数据隐私', '生成式 AI 规范'],
+	},
+];
+
+const books = [
+	{ name: '《人工智能：现代方法》', meta: 'Russell & Norvig · AIMA', note: '全球经典教材，搜索-逻辑-学习全覆盖' },
+	{ name: '《机器学习》', meta: '周志华 · “西瓜书”', note: '国内机器学习标准教材' },
+	{ name: '《统计学习方法》', meta: '李航', note: '经典统计学习理论，简明严谨' },
+	{ name: '《动手学深度学习》', meta: 'd2l.ai · 免费在线', note: '代码驱动，PyTorch/MXNet 双框架' },
+];
+const labs = [
+	{ name: '吴恩达机器学习 / 深度学习课程', note: '全球入门首选，配套编程作业完整' },
+	{ name: 'Stanford CS231n / CS224n', note: '视觉与 NLP 方向的标杆公开课' },
+	{ name: 'Kaggle / Hugging Face', note: '真实数据竞赛与开源模型实战' },
+];
+---
+
+<section class="crs-block" id="intro">
+	<header class="crs-block-head">
+		<h2>这门课讲什么</h2>
+		<p>
+			人工智能（Artificial Intelligence）研究如何让机器模拟、延伸乃至超越人类的感知、认知与决策能力。
+			导论课程沿“符号主义—联结主义”两条主线展开：从搜索、逻辑与知识表示的经典方法，
+			到机器学习与深度学习的数据驱动范式，再到 NLP、视觉与强化学习的应用纵深——
+			它既是计算机类专业的方向启蒙课，也是通往当今最活跃技术领域的入口。
+		</p>
+	</header>
+
+	<div class="crs-modules">
+		{modules.map((m) => (
+			<article class="crs-module">
+				<h3><span class="crs-mi" aria-hidden="true">{m.icon}</span>{m.title}</h3>
+				<p>{m.desc}</p>
+				<ul>
+					{m.topics.map((t) => <li>{t}</li>)}
+				</ul>
+			</article>
+		))}
+	</div>
+</section>
+
+<section class="crs-block" id="path">
+	<header class="crs-block-head">
+		<h2>先修与后续</h2>
+		<p>人工智能是典型的“数学密集型”课程：三大数学基础直接决定学习深度。</p>
+	</header>
+	<div class="crs-flow">
+		<div class="crs-flow-col pre">
+			<h4>先修课程</h4>
+			{prereq.map((c) => <span class="crs-course">{c}</span>)}
+		</div>
+		<div class="crs-flow-mid">
+			<span class="crs-arrow" aria-hidden="true">→</span>
+			<span class="crs-core">人工智能</span>
+			<span class="crs-arrow" aria-hidden="true">→</span>
+		</div>
+		<div class="crs-flow-col">
+			<h4>并行课程</h4>
+			{parallel.map((c) => <span class="crs-course">{c}</span>)}
+		</div>
+		<div class="crs-flow-col post">
+			<h4>后续课程</h4>
+			{follow.map((c) => <span class="crs-course">{c}</span>)}
+		</div>
+	</div>
+</section>
+
+<section class="crs-block" id="books">
+	<header class="crs-block-head">
+		<h2>经典教材与动手实验</h2>
+		<p>AI 是实践飞驰的领域：教材打地基，公开课与开源生态跟前沿。</p>
+	</header>
+	<div class="crs-books">
+		{books.map((b) => (
+			<article class="crs-book">
+				<h3>{b.name}</h3>
+				<p class="crs-book-meta">{b.meta}</p>
+				<p>{b.note}</p>
+			</article>
+		))}
+	</div>
+	<ul class="crs-labs">
+		{labs.map((l) => (
+			<li><b>{l.name}</b><span>{l.note}</span></li>
+		))}
+	</ul>
+</section>

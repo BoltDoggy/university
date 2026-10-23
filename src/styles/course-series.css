@@ -1,0 +1,84 @@
+/* 课程介绍页共用：AI 课程系列导航与数据锚点卡片（.crs- 命名空间） */
+
+.crs-series {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 0 0 30px;
+}
+
+.crs-series-label {
+	font-size: 12px;
+	font-weight: 650;
+	letter-spacing: 0.08em;
+	color: #9ca3af;
+	margin-right: 4px;
+}
+
+.crs-series a {
+	font-size: 13px;
+	color: #4b5563;
+	text-decoration: none;
+	background: #fff;
+	border: 1px solid #e5e7eb;
+	border-radius: 999px;
+	padding: 6px 14px;
+	transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.crs-series a:hover {
+	border-color: #6d28d9;
+	color: #6d28d9;
+}
+
+.crs-series a.on {
+	color: #fff;
+	background: #6d28d9;
+	border-color: #6d28d9;
+	font-weight: 600;
+	box-shadow: 0 3px 10px rgba(109, 40, 217, 0.25);
+}
+
+.crs-anchorcard {
+	border: 1px solid color-mix(in srgb, #6d28d9 25%, #e5e7eb);
+	background: color-mix(in srgb, #6d28d9 4%, #fff);
+	border-radius: 12px;
+	padding: 16px 18px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	text-decoration: none;
+	color: inherit;
+	transition: box-shadow 0.15s, transform 0.15s;
+}
+
+.crs-anchorcard:hover {
+	box-shadow: 0 10px 24px rgba(109, 40, 217, 0.14);
+	transform: translateY(-2px);
+}
+
+.crs-anchorcard b {
+	font-size: 15px;
+	color: #6d28d9;
+}
+
+.crs-anchorcard span {
+	font-size: 12px;
+	color: #6b7280;
+	font-variant-numeric: tabular-nums;
+}
+
+.crs-anchorcard em {
+	font-style: normal;
+	font-size: 12px;
+	color: #9ca3af;
+	line-height: 1.65;
+}
+
+.crs-anchor-note {
+	margin: 0;
+	font-size: 13px;
+	line-height: 1.85;
+	color: #4b5563;
+}

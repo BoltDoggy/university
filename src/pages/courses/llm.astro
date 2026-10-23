@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AiSeries from '../../components/courses/AiSeries.astro';
+import DataAnchor from '../../components/courses/DataAnchor.astro';
+import CourseContent from '../../components/courses/CourseContent.astro';
+import { llm } from '../../components/llm/content';
+import '../../styles/course-base.css';
+import '../../styles/course-content.css';
+import '../../styles/course-series.css';
+---
+
+<Layout title="大模型技术 · 课程介绍">
+	<div class="crs-page">
+		<header class="hero">
+			<p class="kicker">人工智能课程生态 · 进阶系列 · <a href="/courses/ai/">人工智能</a></p>
+			<h1>大模型技术<span class="en">Large Language Models</span></h1>
+			<p class="sub">
+				以 Transformer 为骨架、缩放定律为方法论的新一代技术栈：预训练、对齐、提示、检索增强、智能体与部署。
+				国标发布于 2018 年 1 月（GPT-1 刚刚问世），这是国标之后由产业与科研共同催生的全新课程。
+			</p>
+			<nav class="toc" aria-label="页面导航">
+				<a href="#anchor">数据锚点</a>
+				<a href="#intro">内容模块</a>
+				<a href="#path">先修与后续</a>
+				<a href="#books">教材与实验</a>
+			</nav>
+			<AiSeries current="大模型技术" />
+		</header>
+
+		<DataAnchor note="大模型技术未出现在国标 30 份核心课程示例中——这几乎是必然的：国标发布于 2018 年 1 月，GPT-1 当月刚发表，ChatGPT（2022）与大模型浪潮发生在标准定稿四年之后。它是数据集中距离「诞生最晚」的课程。" />
+		<CourseContent {...llm} />
+
+		<footer class="foot">
+			本页数据锚点来自《普通高等学校本科专业类教学质量国家标准》（2018）附录与《普通高等学校本科专业目录（2026 年）》；
+			内容模块、先修后续与教材部分为常见教学体系整理，不来自国标。各高校实际课程设置以本校培养方案为准。
+		</footer>
+	</div>
+</Layout>

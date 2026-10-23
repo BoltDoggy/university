@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AiSeries from '../../components/courses/AiSeries.astro';
+import DataAnchor from '../../components/courses/DataAnchor.astro';
+import CourseContent from '../../components/courses/CourseContent.astro';
+import { dialog } from '../../components/dialog/content';
+import '../../styles/course-base.css';
+import '../../styles/course-content.css';
+import '../../styles/course-series.css';
+---
+
+<Layout title="对话系统 · 课程介绍">
+	<div class="crs-page">
+		<header class="hero">
+			<p class="kicker">人工智能课程生态 · 进阶系列 · <a href="/courses/ai/">人工智能</a></p>
+			<h1>对话系统<span class="en">Dialog Systems / Conversational AI</span></h1>
+			<p class="sub">
+				人机语言交互的技术与系统：任务型对话、开放域聊天、问答与语音助手。
+				从理解—管理—生成的经典管线到大模型端到端对话——AI 离用户最近的形态。
+			</p>
+			<nav class="toc" aria-label="页面导航">
+				<a href="#anchor">数据锚点</a>
+				<a href="#intro">内容模块</a>
+				<a href="#path">先修与后续</a>
+				<a href="#books">教材与实验</a>
+			</nav>
+			<AiSeries current="对话系统" />
+		</header>
+
+		<DataAnchor note="对话系统未出现在国标 30 份核心课程示例中。事实上 2018 年前对话系统已有相当学术积累（任务型对话、聊天机器人、语音助手产品），但作为本科课程尚未普及，其内容散见「人工智能」与「智能技术」领域；大模型时代的助手产品让这门课彻底重写。" />
+		<CourseContent {...dialog} />
+
+		<footer class="foot">
+			本页数据锚点来自《普通高等学校本科专业类教学质量国家标准》（2018）附录与《普通高等学校本科专业目录（2026 年）》；
+			内容模块、先修后续与教材部分为常见教学体系整理，不来自国标。各高校实际课程设置以本校培养方案为准。
+		</footer>
+	</div>
+</Layout>

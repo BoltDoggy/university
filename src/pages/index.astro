@@ -3,8 +3,17 @@ import Layout from '../layouts/Layout.astro';
 import majors from '../data/majors-2026.json';
 import { DATA as industry } from '../data/industry.js';
 import occupations from '../data/occupations-2022.json';
+import '../styles/home.css';
+import coreCourses from '../data/core-courses.json';
 
 const { meta } = industry;
+
+const cc = coreCourses.classes;
+const ccMajors = cc.reduce((s: number, c: { majors: unknown[] }) => s + c.majors.length, 0);
+const ccExamples = cc.reduce(
+	(s: number, c: { majors: { ex: unknown[] }[] }) => s + c.majors.reduce((t: number, m) => t + m.ex.length, 0),
+	0,
+);
 
 interface DatasetCard {
 	href: string;
@@ -48,6 +57,20 @@ const datasets: DatasetCard[] = [
 		go: '浏览分类',
 	},
 	{
+		href: '/core-courses',
+		accent: '#0e7490',
+		source: '教育部教学指导委员会 · 高等教育出版社 2018',
+		badge: '国标',
+		title: '本科专业类核心课程',
+		desc: '电子信息类与计算机类的核心课程体系示例：课程公共度排行、专业 × 课程矩阵，找出覆盖全部专业的公共核心课。',
+		stats: [
+			[cc.length, '专业类'],
+			[ccMajors, '专业'],
+			[ccExamples, '课程示例'],
+		],
+		go: '查看课程',
+	},
+	{
 		href: '/occupations',
 		accent: '#b45309',
 		source: `人力资源和社会保障部 · ${occupations.edition}`,
@@ -62,6 +85,24 @@ const datasets: DatasetCard[] = [
 		],
 		go: '浏览大典',
 	},
+];
+
+/** 课程解读页入口（临时：未全部接入 /core-courses 深链的课程在此统一露出） */
+const courseEntries: { name: string; href: string; tag: string }[] = [
+	{ name: '操作系统', href: '/courses/os/', tag: '国标' },
+	{ name: '人工智能', href: '/courses/ai/', tag: '国标' },
+	{ name: '机器学习导论', href: '/courses/ml/', tag: 'AI 系列' },
+	{ name: '深度学习', href: '/courses/dl/', tag: 'AI 系列' },
+	{ name: '强化学习', href: '/courses/rl/', tag: 'AI 系列' },
+	{ name: '自然语言处理', href: '/courses/nlp/', tag: 'AI 系列' },
+	{ name: '对话系统', href: '/courses/dialog/', tag: 'AI 系列' },
+	{ name: '大模型技术', href: '/courses/llm/', tag: 'AI 系列' },
+	{ name: '大模型与智能体', href: '/courses/agent/', tag: 'AI 系列' },
+	{ name: 'AI 应用工程', href: '/courses/app-eng/', tag: 'AI 系列' },
+	{ name: 'AI 产品工程', href: '/courses/prod-eng/', tag: 'AI 系列' },
+	{ name: 'AI 产品实践', href: '/courses/practice/', tag: 'AI 系列' },
+	{ name: '自动决策系统', href: '/courses/decision/', tag: 'AI 系列' },
+	{ name: '课程图谱', href: '/courses/map/', tag: '总览' },
 ];
 ---
 
@@ -120,219 +161,21 @@ const datasets: DatasetCard[] = [
 				<p class="ghost-sub">职业教育专业目录 · 研究生学科目录 · ……</p>
 			</div>
 		</div>
+
+		<div class="course-strip">
+			<span class="strip-label">课程解读</span>
+			<div class="strip-links">
+				{
+					courseEntries.map((c) => (
+						<a class="strip-link" href={c.href}>
+							<i class={c.tag === '国标' ? 'dot guobiao' : 'dot ai'} />
+							{c.name}
+							<em>{c.tag}</em>
+						</a>
+					))
+				}
+			</div>
+			<span class="strip-note">基于《教学质量国家标准》数据延伸 · 持续补充</span>
+		</div>
 	</main>
 </Layout>
-
-<style>
-	.hub {
-		position: relative;
-		min-height: 100vh;
-		box-sizing: border-box;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		gap: 40px;
-		padding: 56px 24px;
-		overflow: hidden;
-	}
-	.glow {
-		position: absolute;
-		border-radius: 50%;
-		filter: blur(80px);
-		pointer-events: none;
-	}
-	.glow.g1 {
-		width: 420px;
-		height: 420px;
-		background: #c7d2fe;
-		top: -140px;
-		right: -100px;
-		opacity: 0.55;
-	}
-	.glow.g2 {
-		width: 360px;
-		height: 360px;
-		background: #bae6fd;
-		bottom: -160px;
-		left: -120px;
-		opacity: 0.5;
-	}
-	.head {
-		position: relative;
-		text-align: center;
-	}
-	.pill {
-		display: inline-flex;
-		align-items: center;
-		gap: 7px;
-		margin: 0 0 18px;
-		font-size: 13px;
-		color: #4b5563;
-		background: #fff;
-		border: 1px solid #e5e7eb;
-		border-radius: 999px;
-		padding: 5px 14px;
-		box-shadow: 0 1px 2px rgba(28, 32, 36, 0.04);
-	}
-	.pill i {
-		width: 7px;
-		height: 7px;
-		border-radius: 50%;
-		background: #10b981;
-		box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
-	}
-	h1 {
-		margin: 0;
-		font-size: clamp(30px, 5vw, 42px);
-		letter-spacing: 0.02em;
-	}
-	.sub {
-		margin: 12px 0 0;
-		color: #4b5563;
-		line-height: 1.8;
-	}
-	.grid {
-		position: relative;
-		width: 100%;
-		max-width: 1120px;
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-		gap: 20px;
-	}
-	.card {
-		--accent: #4f46e5;
-		display: flex;
-		flex-direction: column;
-		gap: 12px;
-		box-sizing: border-box;
-		background: #fff;
-		border: 1px solid #e5e7eb;
-		border-radius: 18px;
-		padding: 26px;
-		color: inherit;
-		text-decoration: none;
-		transition:
-			transform 0.18s,
-			box-shadow 0.18s,
-			border-color 0.18s;
-	}
-	.card:hover {
-		transform: translateY(-4px);
-		border-color: color-mix(in srgb, var(--accent) 45%, #e5e7eb);
-		box-shadow: 0 14px 32px rgba(28, 32, 36, 0.09);
-	}
-	.source {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-		margin: 0;
-		font-size: 12.5px;
-		color: #6b7280;
-	}
-	.icon {
-		display: inline-flex;
-		width: 26px;
-		height: 26px;
-		align-items: center;
-		justify-content: center;
-		border-radius: 8px;
-		color: var(--accent);
-		background: color-mix(in srgb, var(--accent) 10%, #fff);
-		flex: none;
-	}
-	.icon svg {
-		width: 15px;
-		height: 15px;
-	}
-	h2 {
-		margin: 0;
-		font-size: 19px;
-		line-height: 1.45;
-		display: flex;
-		align-items: center;
-		flex-wrap: wrap;
-		gap: 8px;
-	}
-	.badge {
-		font-size: 11.5px;
-		font-weight: 600;
-		color: var(--accent);
-		background: color-mix(in srgb, var(--accent) 9%, #fff);
-		border-radius: 6px;
-		padding: 2px 7px;
-	}
-	.desc {
-		margin: 0;
-		flex: 1;
-		color: #4b5563;
-		font-size: 13.5px;
-		line-height: 1.85;
-	}
-	.stats {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 6px 16px;
-		margin: 0;
-		padding-top: 14px;
-		border-top: 1px solid #f0f1f4;
-		font-size: 12px;
-		color: #6b7280;
-	}
-	.stat b {
-		font-size: 16px;
-		font-weight: 650;
-		color: #1c2024;
-		margin-right: 4px;
-		font-variant-numeric: tabular-nums;
-	}
-	.go {
-		display: inline-flex;
-		align-items: center;
-		gap: 6px;
-		font-size: 14px;
-		font-weight: 600;
-		color: var(--accent);
-	}
-	.arrow {
-		width: 15px;
-		height: 15px;
-		transition: transform 0.18s;
-	}
-	.card:hover .arrow {
-		transform: translateX(4px);
-	}
-	.ghost {
-		align-items: center;
-		justify-content: center;
-		text-align: center;
-		border-style: dashed;
-		border-color: #d8dbe2;
-		background: rgba(255, 255, 255, 0.45);
-		color: #9ca3af;
-	}
-	.plus {
-		display: inline-flex;
-		width: 34px;
-		height: 34px;
-		align-items: center;
-		justify-content: center;
-		border-radius: 50%;
-		border: 1.5px dashed #c9cdd6;
-	}
-	.plus svg {
-		width: 16px;
-		height: 16px;
-	}
-	.ghost-title {
-		margin: 2px 0 0;
-		font-size: 14px;
-		font-weight: 600;
-		color: #6b7280;
-	}
-	.ghost-sub {
-		margin: 0;
-		font-size: 12.5px;
-		line-height: 1.7;
-	}
-</style>

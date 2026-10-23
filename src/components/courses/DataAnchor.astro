@@ -1,0 +1,87 @@
+---
+import coreCourses from '../../data/core-courses.json';
+import majorsCatalog from '../../data/majors-2026.json';
+
+/**
+ * 数据锚点区块（供国标未单列的课程使用）：
+ * 如实呈现「0 份示例单列」的事实，并给出最近的数据锚——人工智能课程、智能技术知识领域与智能类专业群。
+ */
+interface Props {
+	note: string;
+}
+const { note } = Astro.props;
+
+// 国标示例中含「人工智能」的条目（已知：计科示例二）
+const anchors = coreCourses.classes.flatMap((c) =>
+	c.majors.flatMap((m) =>
+		m.ex.flatMap((e) =>
+			e.c
+				.filter(([n]) => String(n) === '人工智能')
+				.map(([n, h]) => ({ cls: c.name, major: m.name, code: m.code, ex: e.l, n: String(n), h })),
+		),
+	),
+) as { cls: string; major: string; code: string; ex: string; n: string; h: number | string }[];
+
+// 2026 专业目录智能类专业统计
+let smartCount = 0;
+const byCat = new Map<string, number>();
+for (const cat of majorsCatalog.categories) {
+	for (const cls of cat.classes ?? []) {
+		for (const m of cls.majors) {
+			if (m.name.includes('智能')) {
+				smartCount++;
+				byCat.set(cat.name, (byCat.get(cat.name) ?? 0) + 1);
+			}
+		}
+	}
+}
+---
+
+<section class="crs-block" id="anchor">
+	<header class="crs-block-head">
+		<h2>数据锚点：国标中的位置</h2>
+		<p>{note}</p>
+	</header>
+
+	<div class="crs-statrow">
+		<div class="crs-stat">
+			<b>0 份</b>
+			<span>30 份国标课程示例中<br />未单列本课程</span>
+		</div>
+		<div class="crs-stat">
+			<b>{anchors[0]?.h ?? '—'}</b>
+			<span>最近锚点：人工智能课程<br />（计科示例二，学时）</span>
+		</div>
+		<div class="crs-stat">
+			<b>{smartCount}</b>
+			<span>《专业目录》智能类专业<br />可修读本课</span>
+		</div>
+		<div class="crs-stat">
+			<b>{byCat.size}</b>
+			<span>智能类专业覆盖<br />的学科门类</span>
+		</div>
+	</div>
+
+	<div class="crs-majorlist">
+		<a class="crs-anchorcard" href="/courses/ai/">
+			<b>人工智能 ↗</b>
+			<span>{anchors[0]?.code} 计算机科学与技术 · {anchors[0]?.ex} · {anchors[0]?.h} 学时</span>
+			<em>国标中与本课最近的课程锚点，对应「智能技术」知识领域——本系列课程的共同起点</em>
+		</a>
+		<article class="crs-majorcard wide">
+			<b>为什么国标里没有这门课？</b>
+			<p class="crs-anchor-note">
+				《本科专业类教学质量国家标准》发布于 2018 年 1 月：深度学习浪潮（2012 年 AlexNet）与 AlphaGo（2016 年）
+				刚刚发生，大语言模型更在数年之后——人工智能的进阶课程在本科培养方案中尚未定型，
+				因此国标只以「人工智能」一门课与「智能技术」知识领域收编。如今这些课程已是人工智能、
+				智能科学与技术等专业的核心内容，并延伸至大模型对齐（RLHF）等前沿方向——
+				目录中 {smartCount} 个智能类专业（遍布 {byCat.size} 个门类）构成了它们的修读主体。
+			</p>
+		</article>
+	</div>
+
+	<p class="crs-fine">
+		统计依据：`src/data/core-courses.json`（国标附录 30 份示例）与《普通高等学校本科专业目录（2026 年）》。
+		完整示例见<a href="/core-courses/">核心课程可视化</a>。
+	</p>
+</section>

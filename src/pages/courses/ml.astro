@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AiSeries from '../../components/courses/AiSeries.astro';
+import DataAnchor from '../../components/courses/DataAnchor.astro';
+import CourseContent from '../../components/courses/CourseContent.astro';
+import { ml } from '../../components/ml/content';
+import '../../styles/course-base.css';
+import '../../styles/course-content.css';
+import '../../styles/course-series.css';
+---
+
+<Layout title="机器学习导论 · 课程介绍">
+	<div class="crs-page">
+		<header class="hero">
+			<p class="kicker">人工智能课程生态 · 进阶系列 · <a href="/courses/ai/">人工智能</a></p>
+			<h1>机器学习导论<span class="en">Introduction to Machine Learning</span></h1>
+			<p class="sub">
+				从数学基础通往 AI 应用的第一门硬课：线性模型、决策树、支持向量机、无监督学习到神经网络基础，
+				掌握「从数据中学习」的完整方法论。国标示例未单列本课（2018 年编制时课程尚在演化），详见下方数据锚点。
+			</p>
+			<nav class="toc" aria-label="页面导航">
+				<a href="#anchor">数据锚点</a>
+				<a href="#intro">内容模块</a>
+				<a href="#path">先修与后续</a>
+				<a href="#books">教材与实验</a>
+			</nav>
+			<AiSeries current="机器学习导论" />
+		</header>
+
+		<DataAnchor note="机器学习导论未出现在《本科专业类教学质量国家标准》的 30 份核心课程示例中——但它与示例中的「人工智能」课（计科示例二）一脉相承，是人工智能、智能科学与技术等智能类专业的核心基础课。" />
+		<CourseContent {...ml} />
+
+		<footer class="foot">
+			本页数据锚点来自《普通高等学校本科专业类教学质量国家标准》（2018）附录与《普通高等学校本科专业目录（2026 年）》；
+			内容模块、先修后续与教材部分为常见教学体系整理，不来自国标。各高校实际课程设置以本校培养方案为准。
+		</footer>
+	</div>
+</Layout>

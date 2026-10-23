@@ -1,0 +1,94 @@
+---
+/** 课程介绍页通用内容区块：简介 + 内容模块 + 先修后续 + 教材实验（内容为通识整理，非国标数据） */
+interface Module {
+	icon: string;
+	title: string;
+	desc: string;
+	topics: string[];
+}
+interface Book {
+	name: string;
+	meta: string;
+	note: string;
+}
+interface Lab {
+	name: string;
+	note: string;
+}
+interface Props {
+	name: string;
+	intro: string;
+	modules: Module[];
+	prereq: string[];
+	parallel: string[];
+	follow: string[];
+	books: Book[];
+	labs: Lab[];
+}
+const { name, intro, modules, prereq, parallel, follow, books, labs } = Astro.props;
+---
+
+<section class="crs-block" id="intro">
+	<header class="crs-block-head">
+		<h2>这门课讲什么</h2>
+		<p>{intro}</p>
+	</header>
+	<div class="crs-modules">
+		{modules.map((m) => (
+			<article class="crs-module">
+				<h3><span class="crs-mi" aria-hidden="true">{m.icon}</span>{m.title}</h3>
+				<p>{m.desc}</p>
+				<ul>
+					{m.topics.map((t) => <li>{t}</li>)}
+				</ul>
+			</article>
+		))}
+	</div>
+</section>
+
+<section class="crs-block" id="path">
+	<header class="crs-block-head">
+		<h2>先修与后续</h2>
+		<p>课程在培养体系中的位置：向下衔接基础课，向上开启方向课。</p>
+	</header>
+	<div class="crs-flow">
+		<div class="crs-flow-col pre">
+			<h4>先修课程</h4>
+			{prereq.map((c) => <span class="crs-course">{c}</span>)}
+		</div>
+		<div class="crs-flow-mid">
+			<span class="crs-arrow" aria-hidden="true">→</span>
+			<span class="crs-core">{name}</span>
+			<span class="crs-arrow" aria-hidden="true">→</span>
+		</div>
+		<div class="crs-flow-col">
+			<h4>并行课程</h4>
+			{parallel.map((c) => <span class="crs-course">{c}</span>)}
+		</div>
+		<div class="crs-flow-col post">
+			<h4>后续课程</h4>
+			{follow.map((c) => <span class="crs-course">{c}</span>)}
+		</div>
+	</div>
+</section>
+
+<section class="crs-block" id="books">
+	<header class="crs-block-head">
+		<h2>经典教材与动手实验</h2>
+		<p>教材打地基，公开课与开源生态跟前沿。</p>
+	</header>
+	<div class="crs-books">
+		{books.map((b) => (
+			<article class="crs-book">
+				<h3>{b.name}</h3>
+				<p class="crs-book-meta">{b.meta}</p>
+				<p>{b.note}</p>
+			</article>
+		))}
+	</div>
+	<ul class="crs-labs">
+		{labs.map((l) => (
+			<li><b>{l.name}</b><span>{l.note}</span></li>
+		))}
+	</ul>
+</section>

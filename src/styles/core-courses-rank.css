@@ -1,0 +1,125 @@
+/* 核心课程页：课程公共度排行（.cc-page 命名空间） */
+
+/* ── 课程公共度排行 ───────────────────────────────── */
+.cc-rank {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.cc-rank li {
+	display: grid;
+	grid-template-columns: 30px minmax(140px, 240px) 1fr 92px 76px 90px;
+	gap: 12px;
+	align-items: center;
+	padding: 8px 6px;
+	border-bottom: 1px dashed #f0f1f4;
+	font-size: 13.5px;
+}
+
+.cc-rank li:last-child {
+	border-bottom: 0;
+}
+
+.cc-rank-no {
+	color: #9ca3af;
+	font-size: 12px;
+	font-variant-numeric: tabular-nums;
+	text-align: right;
+}
+
+.cc-rank-name {
+	font-weight: 550;
+	color: #1c2024;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.cc-rank-bar {
+	height: 8px;
+	border-radius: 999px;
+	background: #f1f3f6;
+	overflow: hidden;
+}
+
+.cc-rank-bar i {
+	display: block;
+	height: 100%;
+	border-radius: 999px;
+	background: linear-gradient(90deg, color-mix(in srgb, var(--cc) 55%, #fff), var(--cc));
+}
+
+.cc-rank li.most .cc-rank-bar i {
+	background: linear-gradient(90deg, color-mix(in srgb, var(--cc) 70%, #fff), var(--cc));
+}
+
+.cc-rank li.full .cc-rank-bar i {
+	background: linear-gradient(90deg, var(--cc), color-mix(in srgb, var(--cc) 70%, #000));
+}
+
+.cc-rank-meta {
+	color: #4b5563;
+	font-variant-numeric: tabular-nums;
+	white-space: nowrap;
+}
+
+.cc-rank-meta b {
+	color: #1c2024;
+	font-weight: 650;
+}
+
+.cc-rank-meta.dim {
+	color: #9ca3af;
+}
+
+.cc-rank-hours {
+	color: #6b7280;
+	font-size: 12.5px;
+	text-align: right;
+	white-space: nowrap;
+	font-variant-numeric: tabular-nums;
+}
+
+.cc-rank li.full .cc-rank-name {
+	color: var(--cc);
+}
+
+.cc-more {
+	align-self: flex-start;
+	margin-top: 12px;
+	border: 1px dashed #c9cdd6;
+	background: transparent;
+	border-radius: 9px;
+	padding: 7px 14px;
+	font-size: 12.5px;
+	color: #4b5563;
+	cursor: pointer;
+	transition: border-color 0.15s, color 0.15s;
+}
+
+.cc-more:hover {
+	border-color: var(--cc);
+	color: var(--cc);
+}
+
+/* 拥有独立介绍页的课程：名称链接 */
+.cc-rank-name.link {
+	color: var(--cc);
+	text-decoration: none;
+	font-weight: 650;
+}
+
+.cc-rank-name.link i {
+	font-style: normal;
+	font-size: 11px;
+	margin-left: 3px;
+	opacity: 0.7;
+}
+
+.cc-rank-name.link:hover {
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}

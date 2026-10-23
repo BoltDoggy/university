@@ -1,0 +1,39 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CourseGraph from '../../components/graph/CourseGraph';
+import AiSeries from '../../components/courses/AiSeries.astro';
+import { relStats } from '../../components/courses/relations';
+import '../../styles/course-series.css';
+import '../../styles/courses-map.css';
+---
+
+<Layout title="课程关系图谱 · 可视化">
+	<div class="cmap-page">
+		<header class="hero">
+			<p class="kicker">人工智能课程生态 · 系列总览</p>
+			<h1>课程关系图谱</h1>
+			<p class="sub">
+				根据各课程页声明的先修 / 并行 / 后续关系自动绘制：数学与程序基础打底，
+				人工智能与机器学习导论分叉，经深度学习、自然语言处理汇聚到大模型，再展开为工程、产品与决策的分支——
+				悬停任意课程聚焦其关系网络，点击卡片进入介绍页。
+			</p>
+			<ul class="stat-chips">
+				<li><b>{relStats.courses}</b><span>课程页</span></li>
+				<li><b>{relStats.basics}</b><span>归并基础课</span></li>
+				<li><b>{relStats.reqEdges}</b><span>先修 / 后续关系</span></li>
+				<li><b>{relStats.parEdges}</b><span>并行修读</span></li>
+				<li><b class="ext">{relStats.extCount}</b><span>未建页课程（可开关）</span></li>
+			</ul>
+			<AiSeries current="课程图谱" />
+		</header>
+
+		<div class="cmap-block">
+			<CourseGraph client:visible />
+		</div>
+
+		<footer class="foot">
+			关系数据取自各课程介绍页的先修与后续声明（src/components/courses/relations.ts 为单一数据源）；
+			分层与排序由最长路径分层和邻接重心算法在渲染时自动计算。基础课节点为多门课程的归并（悬停查看明细）。
+		</footer>
+	</div>
+</Layout>

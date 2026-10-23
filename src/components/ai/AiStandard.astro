@@ -1,0 +1,134 @@
+---
+import coreCourses from '../../data/core-courses.json';
+import majorsCatalog from '../../data/majors-2026.json';
+
+/** 数据来源一：国标课程示例中「人工智能」的出现情况 */
+const csCls = coreCourses.classes.find((c) => c.code === '0809') as unknown as {
+	majors: { name: string; code: string; pro: string[]; ex: { l: string; c: [string, number | string][] }[] }[];
+};
+const csMajor = csCls.majors.find((m) => m.code === '080901')!;
+const aiHits = csMajor.ex
+	.flatMap((ex) => ex.c.map(([n, h]) => ({ ex: ex.l, n: String(n), h })))
+	.filter((x) => x.n === '人工智能');
+const aiHours = aiHits.map((x) => x.h).filter((h): h is number => typeof h === 'number');
+const exTotal = csCls.majors.reduce((s, m) => s + m.ex.length, 0);
+const otherExWithAI = coreCourses.classes
+	.flatMap((c) => c.majors.flatMap((m) => m.ex.flatMap((e) => e.c.map(([n]) => String(n)))))
+	.filter((n) => n.includes('人工智能')).length;
+
+/** 数据来源二：2026 专业目录中的智能类专业群 */
+interface MajorItem {
+	code: string;
+	name: string;
+	is_special?: boolean;
+}
+const smartMajors: { cat: string; major: MajorItem }[] = [];
+for (const cat of majorsCatalog.categories) {
+	for (const cls of cat.classes ?? []) {
+		for (const m of cls.majors) {
+			if (m.name.includes('智能')) smartMajors.push({ cat: cat.name, major: m });
+		}
+	}
+}
+const byCat = new Map<string, number>();
+for (const s of smartMajors) byCat.set(s.cat, (byCat.get(s.cat) ?? 0) + 1);
+const catRows = [...byCat.entries()].sort((a, b) => b[1] - a[1]);
+const maxCat = catRows[0]?.[1] ?? 1;
+const coreMajors = smartMajors.filter((s) => ['人工智能', '智能科学与技术'].includes(s.major.name));
+---
+
+<section class="crs-block" id="standard">
+	<header class="crs-block-head">
+		<h2>在国家标准中的定位</h2>
+		<p>
+			与「操作系统」不同，人工智能在国标核心课程示例中<b>不是全体共同基础课</b>，而是计算机科学与技术专业的一份
+			<b>专业知识课程</b>——对应其专业知识领域中的「智能技术」。它出现于三份示例之一，体现了各校按方向选修的弹性。
+		</p>
+	</header>
+
+	<div class="crs-statrow">
+		<div class="crs-stat">
+			<b>{aiHits.length} 份</b>
+			<span>计科 {csMajor.ex.length} 份示例中<br />{aiHits[0]?.ex} 采用</span>
+		</div>
+		<div class="crs-stat">
+			<b>{aiHours[0] ?? '—'}</b>
+			<span>建议学时<br />（约 {Math.round(((aiHours[0] ?? 48) / 16) * 10) / 10} 学分）</span>
+		</div>
+		<div class="crs-stat">
+			<b>{smartMajors.length}</b>
+			<span>《专业目录》智能类专业<br />遍布 {byCat.size} 个学科门类</span>
+		</div>
+		<div class="crs-stat">
+			<b>{otherExWithAI}</b>
+			<span>全库含「人工智能」<br />课程条目</span>
+		</div>
+	</div>
+
+	<div class="crs-areas">
+		<span class="crs-area">数字电路</span>
+		<span class="crs-area">计算机系统结构</span>
+		<span class="crs-area">算法</span>
+		<span class="crs-area">程序设计语言</span>
+		<span class="crs-area">软件工程</span>
+		<span class="crs-area">并行分布计算</span>
+		<span class="crs-area on">智能技术</span>
+		<span class="crs-area">计算机图形学与人机交互</span>
+	</div>
+	<p class="crs-fine">计算机科学与技术专业的八个专业知识领域中，「智能技术」即人工智能课程的栖身之处（其余领域同样各自对应专业课程）。</p>
+
+	<h3 class="crs-sub">从一门课到一个专业群</h3>
+	<div class="crs-majorlist">
+		{coreMajors.map((s) => (
+			<article class="crs-majorcard">
+				<b>{s.major.name}</b>
+				<span>{s.major.code}{s.major.is_special ? ' · 特设' : ''} · {s.cat}</span>
+				<em>{s.major.name === '人工智能' ? '以 AI 本体为核心的特设专业' : '计算机类中偏理论与系统的 AI 专业'}</em>
+			</article>
+		))}
+		<article class="crs-majorcard wide">
+			<b>{smartMajors.length} 个智能类专业</b>
+			<div class="crs-catbars">
+				{catRows.map(([cat, n]) => (
+					<div class="crs-catrow">
+						<span>{cat}</span>
+						<i style={`width: ${(n / maxCat) * 100}%`}></i>
+						<b>{n}</b>
+					</div>
+				))}
+			</div>
+			<em>智能制造、智能车辆、智能感知……「AI + X」已成目录中最活跃的特设专业增长带</em>
+		</article>
+	</div>
+
+	<table class="crs-table">
+		<thead>
+			<tr>
+				<th>专业</th>
+				<th>示例</th>
+				<th>课程名称</th>
+				<th class="num">建议学时</th>
+			</tr>
+		</thead>
+		<tbody>
+			{aiHits.map((h) => (
+				<tr>
+					<td><span class="crs-major-code">{csMajor.code}</span>{csMajor.name}</td>
+					<td>{h.ex}</td>
+					<td class="exact">{h.n}</td>
+					<td class="num">{h.h}</td>
+				</tr>
+			))}
+			<tr>
+				<td colspan={4} class="crs-note-row">
+					其余 {exTotal - aiHits.length} 份计算机类示例未单列人工智能课程，但普遍以「智能技术」知识领域形式覆盖相关内容
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p class="crs-fine">
+		数据一：《普通高等学校本科专业类教学质量国家标准》附录（计算机类 2.2.1 示例二）；数据二：《普通高等学校本科专业目录（2026 年）》。
+		完整课程示例见<a href="/core-courses/">核心课程可视化</a>。
+	</p>
+</section>

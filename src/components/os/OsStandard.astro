@@ -1,0 +1,104 @@
+---
+import coreCourses from '../../data/core-courses.json';
+
+/** 国标数据：计算机类 + 电子信息类中「操作系统」的出现情况（含名称变体） */
+const OS_MATCH = (name: string) => name.includes('操作系统');
+
+interface Hit {
+	cls: string;
+	clsCode: string;
+	major: string;
+	majorCode: string;
+	example: string;
+	course: string;
+	hours: number;
+}
+
+const hits: Hit[] = [];
+for (const cls of coreCourses.classes) {
+	for (const m of cls.majors) {
+		for (const ex of m.ex) {
+			for (const [name, h] of ex.c as [string, number | string][]) {
+				if (OS_MATCH(name) && typeof h === 'number') {
+					hits.push({ cls: cls.name, clsCode: cls.code, major: m.name, majorCode: m.code, example: ex.l, course: name, hours: h });
+				}
+			}
+		}
+	}
+}
+const csCls = coreCourses.classes.find((c) => c.code === '0809')! as { name: string; majors: { name: string; ex: { l: string }[] }[] } & Record<string, unknown>;
+const csHits = hits.filter((h) => h.clsCode === '0809');
+const csMajors = [...new Set(csHits.map((h) => h.major))];
+const csExamples = csHits.length;
+const csExTotal = csCls.majors.reduce((s, m) => s + m.ex.length, 0);
+const hourList = csHits.map((h) => h.hours);
+const hMin = Math.min(...hourList);
+const hMax = Math.max(...hourList);
+const other = hits.filter((h) => h.clsCode !== '0809');
+const common = csCls.common as string[];
+---
+
+<section class="crs-block" id="standard">
+	<header class="crs-block-head">
+		<h2>在国家标准中的定位</h2>
+		<p>
+			《普通高等学校本科专业类教学质量国家标准》（2018）将「操作系统」列为计算机类<b>学科基础六大共同核心知识领域</b>之一——
+			无论将来走软件、网络、安全还是物联网方向，这门课都是必修的地基。
+		</p>
+	</header>
+
+	<div class="crs-areas">
+		{common.map((a) => <span class={`crs-area${a === '操作系统' ? ' on' : ''}`}>{a}</span>)}
+	</div>
+
+	<div class="crs-statrow">
+		<div class="crs-stat">
+			<b>{csMajors.length}/{csCls.majors.length}</b>
+			<span>计算机类专业<br />全部采用</span>
+		</div>
+		<div class="crs-stat">
+			<b>{csExamples}/{csExTotal}</b>
+			<span>核心课程示例<br />份份包含</span>
+		</div>
+		<div class="crs-stat">
+			<b>{hMin}–{hMax}</b>
+			<span>建议学时<br />（约 {Math.round((hMin / 16) * 10) / 10}–{Math.round((hMax / 16) * 10) / 10} 学分）</span>
+		</div>
+		<div class="crs-stat">
+			<b>{other.length}</b>
+			<span>电子信息类亦有采用<br />（信息工程）</span>
+		</div>
+	</div>
+
+	<table class="crs-table">
+		<thead>
+			<tr>
+				<th>专业</th>
+				<th>示例</th>
+				<th>课程名称</th>
+				<th class="num">建议学时</th>
+			</tr>
+		</thead>
+		<tbody>
+			{hits.map((h) => (
+				<tr class={h.clsCode === '0809' ? 'cs' : 'ele'}>
+					<td>
+						<span class="crs-major-code">{h.majorCode}</span>
+						{h.major}
+						{h.clsCode !== '0809' && <em class="crs-from">{h.cls}</em>}
+					</td>
+					<td>{h.example}</td>
+					<td class={h.course === '操作系统' ? 'exact' : 'variant'}>
+						{h.course}{h.course !== '操作系统' && <i>变体名</i>}
+					</td>
+					<td class="num">{h.hours}</td>
+				</tr>
+			))}
+		</tbody>
+	</table>
+
+	<p class="crs-fine">
+		依据计算机类学分结构：理论课程 16 学时计 1 学分；信息安全专业课程名强调「原理及安全」，教学内容还覆盖操作系统安全机制。
+		完整的计算机类与电子信息类课程示例清单见<a href="/core-courses/">核心课程可视化</a>。
+	</p>
+</section>

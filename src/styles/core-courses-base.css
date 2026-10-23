@@ -1,0 +1,207 @@
+/* 核心课程页（.cc-page 命名空间，React island 渲染的 DOM 同样适用） */
+
+.cc-page {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 24px 40px;
+}
+
+.cc-page .hero {
+	padding: 40px 0 20px;
+}
+
+.cc-page .kicker {
+	margin: 0 0 8px;
+	font-size: 13px;
+	letter-spacing: 0.12em;
+	color: #0e7490;
+}
+
+.cc-page h1 {
+	margin: 0;
+	font-size: 34px;
+	letter-spacing: 0.02em;
+}
+
+.cc-page .sub {
+	margin: 12px 0 20px;
+	max-width: 680px;
+	color: #4b5563;
+	line-height: 1.7;
+}
+
+.cc-page .stat-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.cc-page .stat-chips li {
+	display: flex;
+	align-items: baseline;
+	gap: 7px;
+	background: #fff;
+	border: 1px solid #e5e7eb;
+	border-radius: 10px;
+	padding: 8px 14px;
+}
+
+.cc-page .stat-chips b {
+	font-size: 20px;
+	font-variant-numeric: tabular-nums;
+	color: #1c2024;
+}
+
+.cc-page .stat-chips span {
+	font-size: 13px;
+	color: #6b7280;
+}
+
+.cc-page .foot {
+	margin-top: 34px;
+	padding-top: 18px;
+	border-top: 1px solid #e5e7eb;
+	font-size: 12.5px;
+	color: #9ca3af;
+	line-height: 1.9;
+}
+
+.cc-page .stat-chips b {
+	color: #1c2024;
+}
+
+/* ── 工具栏：专业类切换 + 搜索 ─────────────────────── */
+.cc-app {
+	--cc: #0e7490;
+	max-width: 1120px;
+	margin: 0 auto;
+	padding: 0 24px 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 26px;
+}
+
+.cc-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 14px;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.cc-tabs {
+	display: inline-flex;
+	gap: 8px;
+	padding: 5px;
+	background: #fff;
+	border: 1px solid #e5e7eb;
+	border-radius: 14px;
+	box-shadow: 0 1px 2px rgba(28, 32, 36, 0.04);
+}
+
+.cc-tab {
+	display: flex;
+	align-items: baseline;
+	gap: 8px;
+	border: 0;
+	background: transparent;
+	border-radius: 10px;
+	padding: 9px 18px;
+	cursor: pointer;
+	font-size: 15px;
+	color: #4b5563;
+	transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.cc-tab span {
+	font-size: 12px;
+	font-variant-numeric: tabular-nums;
+	opacity: 0.75;
+}
+
+.cc-tab.on {
+	background: color-mix(in srgb, var(--cc) 10%, #fff);
+	color: var(--cc);
+	box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--cc) 35%, #fff);
+}
+
+.cc-tab.on b {
+	color: var(--cc);
+}
+
+.cc-search input {
+	width: 260px;
+	max-width: 100%;
+	box-sizing: border-box;
+	border: 1px solid #e5e7eb;
+	border-radius: 10px;
+	background: #fff;
+	padding: 10px 14px;
+	font-size: 13.5px;
+	color: #1c2024;
+	outline: none;
+	transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.cc-search input:focus {
+	border-color: color-mix(in srgb, var(--cc) 55%, #e5e7eb);
+	box-shadow: 0 0 0 3px color-mix(in srgb, var(--cc) 12%, transparent);
+}
+
+/* ── 学分结构说明 ─────────────────────────────────── */
+.cc-credit {
+	margin: 0;
+	font-size: 13px;
+	line-height: 1.9;
+	color: #4b5563;
+	background: color-mix(in srgb, var(--cc) 5%, #fff);
+	border: 1px solid color-mix(in srgb, var(--cc) 18%, #e5e7eb);
+	border-radius: 12px;
+	padding: 12px 16px;
+}
+
+.cc-chipln {
+	display: inline-block;
+	font-weight: 650;
+	color: var(--cc);
+	margin-right: 6px;
+}
+
+.cc-note {
+	color: #6b7280;
+}
+
+/* ── 区块 ─────────────────────────────────────────── */
+.cc-block {
+	background: #fff;
+	border: 1px solid #e5e7eb;
+	border-radius: 16px;
+	padding: 22px 24px;
+	box-shadow: 0 1px 2px rgba(28, 32, 36, 0.04);
+}
+
+.cc-block-head h3 {
+	margin: 0 0 6px;
+	font-size: 17px;
+}
+
+.cc-block-head p {
+	margin: 0 0 16px;
+	font-size: 13px;
+	line-height: 1.85;
+	color: #6b7280;
+}
+
+.cc-block-head b {
+	color: var(--cc);
+}
+
+.cc-empty {
+	color: #9ca3af;
+	font-size: 13px;
+	padding: 14px 4px;
+	margin: 0;
+}

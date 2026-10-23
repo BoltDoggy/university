@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AiSeries from '../../components/courses/AiSeries.astro';
+import DataAnchor from '../../components/courses/DataAnchor.astro';
+import CourseContent from '../../components/courses/CourseContent.astro';
+import { prodEng } from '../../components/prodeng/content';
+import '../../styles/course-base.css';
+import '../../styles/course-content.css';
+import '../../styles/course-series.css';
+---
+
+<Layout title="AI 产品工程 · 课程介绍">
+	<div class="crs-page">
+		<header class="hero">
+			<p class="kicker">人工智能课程生态 · 进阶系列 · <a href="/courses/ai/">人工智能</a></p>
+			<h1>AI 产品工程<span class="en">AI Product Engineering</span></h1>
+			<p class="sub">
+				从产品视角组织 AI 工程实现：需求发现、模型能力边界评估、产品架构与护栏、数据驱动迭代直至商业模式——
+				与应用工程互为表里：那边管流水线与运维，这边管「做什么、为谁做、值不值得做」。
+			</p>
+			<nav class="toc" aria-label="页面导航">
+				<a href="#anchor">数据锚点</a>
+				<a href="#intro">内容模块</a>
+				<a href="#path">先修与后续</a>
+				<a href="#books">教材与实验</a>
+			</nav>
+			<AiSeries current="AI 产品工程" />
+		</header>
+
+		<DataAnchor note="AI 产品工程未出现在国标 30 份核心课程示例中。「AI 产品」岗位与课程在 2018 年前后刚萌芽（AI 产品经理的概念正兴起于彼时），国标时代产品课与技术课各自分立，二者的交叉课程是大模型应用规模化之后才定型的。" />
+		<CourseContent {...prodEng} />
+
+		<footer class="foot">
+			本页数据锚点来自《普通高等学校本科专业类教学质量国家标准》（2018）附录与《普通高等学校本科专业目录（2026 年）》；
+			内容模块、先修后续与教材部分为常见教学体系整理，不来自国标。各高校实际课程设置以本校培养方案为准。
+		</footer>
+	</div>
+</Layout>

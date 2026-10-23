@@ -1,0 +1,283 @@
+/* 课程关系图谱页（.cmap- 命名空间） */
+
+.cmap-page {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 24px 48px;
+}
+
+.cmap-page .hero {
+	padding: 44px 0 8px;
+}
+
+.cmap-page .kicker {
+	margin: 0 0 10px;
+	font-size: 13px;
+	letter-spacing: 0.12em;
+	color: #6d28d9;
+}
+
+.cmap-page h1 {
+	margin: 0;
+	font-size: 34px;
+	letter-spacing: 0.02em;
+}
+
+.cmap-page .sub {
+	margin: 14px 0 22px;
+	max-width: 760px;
+	color: #4b5563;
+	line-height: 1.8;
+}
+
+.cmap-page .stat-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	list-style: none;
+	padding: 0;
+	margin: 0 0 28px;
+}
+
+.cmap-page .stat-chips li {
+	display: flex;
+	align-items: baseline;
+	gap: 7px;
+	background: #fff;
+	border: 1px solid #e5e7eb;
+	border-radius: 10px;
+	padding: 8px 14px;
+}
+
+.cmap-page .stat-chips b {
+	font-size: 20px;
+	font-variant-numeric: tabular-nums;
+}
+
+.cmap-page .stat-chips span {
+	font-size: 13px;
+	color: #6b7280;
+}
+
+.cmap-block {
+	background: #fff;
+	border: 1px solid #e5e7eb;
+	border-radius: 18px;
+	padding: 22px 24px;
+	box-shadow: 0 1px 2px rgba(28, 32, 36, 0.04);
+}
+
+.cmap-legend {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px 18px;
+	margin-bottom: 16px;
+	font-size: 12.5px;
+	color: #4b5563;
+}
+
+.cmap-legend span {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.cmap-legend em {
+	font-style: normal;
+	color: #9ca3af;
+	margin-left: auto;
+}
+
+.cmap-legend .ln {
+	width: 26px;
+	height: 0;
+	border-top: 2px solid #94a3b8;
+}
+
+.cmap-legend .ln.par {
+	border-top-style: dashed;
+	border-top-color: #a78bfa;
+}
+
+.cmap-legend .nd {
+	width: 11px;
+	height: 11px;
+	border-radius: 4px;
+}
+
+.cmap-legend .nd.base {
+	background: #64748b;
+}
+
+.cmap-legend .nd.anchor {
+	background: #0e7490;
+}
+
+.cmap-legend .nd.series {
+	background: #6d28d9;
+}
+
+.cmap-scroll {
+	overflow-x: auto;
+	padding-bottom: 6px;
+}
+
+/* ── 边 ─────────────────────────── */
+.cmap-edge {
+	fill: none;
+	stroke: #cbd5e1;
+	stroke-width: 1.6;
+	transition: stroke-opacity 0.15s, stroke-width 0.15s;
+}
+
+.cmap-edge.par {
+	stroke: #d3c8f5;
+	stroke-dasharray: 5 5;
+}
+
+.cmap-edge.hl {
+	stroke: #6d28d9;
+	stroke-width: 2.4;
+}
+
+.cmap-edge.dim {
+	stroke-opacity: 0.16;
+}
+
+.cmap-arrow {
+	fill: #cbd5e1;
+}
+
+/* ── 节点 ───────────────────────── */
+.cmap-node {
+	cursor: pointer;
+}
+
+.cmap-node.base {
+	cursor: default;
+}
+
+.cmap-node rect {
+	fill: #fff;
+	stroke: #64748b;
+	stroke-width: 1.6;
+	transition: fill 0.15s, stroke-width 0.15s;
+}
+
+.cmap-node.base rect {
+	stroke-dasharray: 5 4;
+	fill: #f8fafc;
+}
+
+.cmap-node.anchor rect {
+	stroke: #0e7490;
+}
+
+.cmap-node.series rect {
+	stroke: #6d28d9;
+}
+
+.cmap-node text {
+	font-size: 13px;
+	fill: #374151;
+	text-anchor: middle;
+	pointer-events: none;
+	white-space: pre;
+}
+
+.cmap-node.anchor rect {
+	fill: #ecfdf9;
+}
+
+.cmap-node.series rect {
+	fill: #f5f2fd;
+}
+
+.cmap-node.hl rect {
+	stroke-width: 2.6;
+	fill: #fff;
+	filter: drop-shadow(0 4px 10px rgba(28, 32, 36, 0.14));
+}
+
+.cmap-node.hl text {
+	font-weight: 650;
+}
+
+.cmap-node.dim {
+	opacity: 0.28;
+}
+
+.cmap-node:not(.base):hover rect {
+	stroke-width: 2.4;
+}
+
+.cmap-page .foot {
+	margin-top: 26px;
+	padding-top: 18px;
+	border-top: 1px solid #e5e7eb;
+	font-size: 12.5px;
+	color: #9ca3af;
+	line-height: 1.9;
+}
+
+/* ── 未建页课程（开关展开） ─────────── */
+.cmap-legend .nd.ext {
+	background: #e2e8f0;
+	border: 1px dashed #94a3b8;
+}
+
+.cmap-node.ext rect {
+	stroke: #94a3b8;
+	stroke-dasharray: 4 3;
+	fill: #fbfcfe;
+}
+
+.cmap-node.ext text {
+	font-size: 12px;
+	fill: #64748b;
+}
+
+.cmap-node.ext.dim {
+	opacity: 0.2;
+}
+
+.cmap-edge.ext:not(.hl) {
+	stroke: #dde3ec;
+}
+
+.cmap-edge.ext.par {
+	stroke: #e8e2f6;
+}
+
+/* 开关 */
+.cmap-toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	font-size: 12.5px;
+	color: #4b5563;
+	cursor: pointer;
+	user-select: none;
+	margin-left: 12px;
+	padding: 5px 12px;
+	border: 1px solid #e5e7eb;
+	border-radius: 999px;
+	background: #fff;
+	transition: border-color 0.15s, color 0.15s;
+}
+
+.cmap-toggle:hover {
+	border-color: #6d28d9;
+	color: #6d28d9;
+}
+
+.cmap-toggle input {
+	accent-color: #6d28d9;
+	margin: 0;
+	cursor: pointer;
+}
+
+.cmap-page .stat-chips b.ext {
+	color: #64748b;
+}

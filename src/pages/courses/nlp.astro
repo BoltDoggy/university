@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AiSeries from '../../components/courses/AiSeries.astro';
+import DataAnchor from '../../components/courses/DataAnchor.astro';
+import CourseContent from '../../components/courses/CourseContent.astro';
+import { nlp } from '../../components/nlp/content';
+import '../../styles/course-base.css';
+import '../../styles/course-content.css';
+import '../../styles/course-series.css';
+---
+
+<Layout title="自然语言处理 · 课程介绍">
+	<div class="crs-page">
+		<header class="hero">
+			<p class="kicker">人工智能课程生态 · 进阶系列 · <a href="/courses/ai/">人工智能</a></p>
+			<h1>自然语言处理<span class="en">Natural Language Processing</span></h1>
+			<p class="sub">
+				让机器理解与生成人类语言：从分词、词向量到 Transformer，再到被大语言模型统一的生成范式。
+				国标示例未单列本课——语言的「听觉侧」（语音信号处理）在电子信息类已有领域，文本侧则由近年课程补齐。
+			</p>
+			<nav class="toc" aria-label="页面导航">
+				<a href="#anchor">数据锚点</a>
+				<a href="#intro">内容模块</a>
+				<a href="#path">先修与后续</a>
+				<a href="#books">教材与实验</a>
+			</nav>
+			<AiSeries current="自然语言处理" />
+		</header>
+
+		<DataAnchor note="自然语言处理未出现在国标 30 份核心课程示例中。有趣的是：语言的「听觉侧」已被覆盖——电子信息工程、信息工程专业的专业知识领域包含「语音信号处理」，而文本侧在当时尚未进入标准。目录中的「翻译」「手语翻译」与特设专业「语言智能」（0502107）则与 NLP 技术直接相关。" />
+		<CourseContent {...nlp} />
+
+		<footer class="foot">
+			本页数据锚点来自《普通高等学校本科专业类教学质量国家标准》（2018）附录与《普通高等学校本科专业目录（2026 年）》；
+			内容模块、先修后续与教材部分为常见教学体系整理，不来自国标。各高校实际课程设置以本校培养方案为准。
+		</footer>
+	</div>
+</Layout>

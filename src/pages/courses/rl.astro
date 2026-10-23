@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AiSeries from '../../components/courses/AiSeries.astro';
+import DataAnchor from '../../components/courses/DataAnchor.astro';
+import CourseContent from '../../components/courses/CourseContent.astro';
+import { rl } from '../../components/rl/content';
+import '../../styles/course-base.css';
+import '../../styles/course-content.css';
+import '../../styles/course-series.css';
+---
+
+<Layout title="强化学习 · 课程介绍">
+	<div class="crs-page">
+		<header class="hero">
+			<p class="kicker">人工智能课程生态 · 进阶系列 · <a href="/courses/ai/">人工智能</a></p>
+			<h1>强化学习<span class="en">Reinforcement Learning</span></h1>
+			<p class="sub">
+				从 AlphaGo 到大模型对齐（RLHF）的决策学习范式：智能体在试错与奖励中学会最优决策。
+				国标未单列本课；在人工智能、智能科学与技术等专业中作为高年级进阶课开设——详见下方数据锚点。
+			</p>
+			<nav class="toc" aria-label="页面导航">
+				<a href="#anchor">数据锚点</a>
+				<a href="#intro">内容模块</a>
+				<a href="#path">先修与后续</a>
+				<a href="#books">教材与实验</a>
+			</nav>
+			<AiSeries current="强化学习" />
+		</header>
+
+		<DataAnchor note="强化学习未出现在国标 30 份核心课程示例中：AlphaGo（2016）声名大振时标准行将定稿，其内容被「人工智能」课与「智能技术」知识领域覆盖。如今强化学习在智能类专业中作为高年级进阶课开设，并经 RLHF 成为大模型训练的关键环节。" />
+		<CourseContent {...rl} />
+
+		<footer class="foot">
+			本页数据锚点来自《普通高等学校本科专业类教学质量国家标准》（2018）附录与《普通高等学校本科专业目录（2026 年）》；
+			内容模块、先修后续与教材部分为常见教学体系整理，不来自国标。各高校实际课程设置以本校培养方案为准。
+		</footer>
+	</div>
+</Layout>

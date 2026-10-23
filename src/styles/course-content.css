@@ -1,0 +1,298 @@
+/* 课程介绍页：内容模块 / 先修后续 / 教材（.crs-page 命名空间） */
+
+/* ── 内容模块 ─────────────────────────────── */
+.crs-modules {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 14px;
+}
+
+.crs-module {
+	border: 1px solid #e5e7eb;
+	border-radius: 14px;
+	padding: 18px 20px;
+	transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+
+.crs-module:hover {
+	border-color: #0e7490;
+	box-shadow: 0 10px 26px rgba(14, 116, 144, 0.1);
+	transform: translateY(-2px);
+}
+
+.crs-module h3 {
+	margin: 0 0 8px;
+	font-size: 15px;
+	display: flex;
+	align-items: center;
+	gap: 9px;
+}
+
+.crs-mi {
+	font-size: 17px;
+}
+
+.crs-module > p {
+	margin: 0 0 12px;
+	font-size: 13px;
+	line-height: 1.8;
+	color: #6b7280;
+}
+
+.crs-module ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.crs-module li {
+	font-size: 12px;
+	color: #0e7490;
+	background: color-mix(in srgb, #0e7490 7%, #fff);
+	border-radius: 6px;
+	padding: 3px 9px;
+}
+
+/* ── 先修后续 ─────────────────────────────── */
+.crs-flow {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr 1fr;
+	gap: 16px;
+	align-items: stretch;
+}
+
+.crs-flow-col {
+	border: 1px dashed #d8dbe2;
+	border-radius: 14px;
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.crs-flow-col h4 {
+	margin: 0 0 4px;
+	font-size: 12px;
+	color: #9ca3af;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+}
+
+.crs-flow-mid {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+}
+
+.crs-core {
+	font-size: 15px;
+	font-weight: 700;
+	color: #fff;
+	background: linear-gradient(135deg, #0e7490, #0891b2);
+	border-radius: 12px;
+	padding: 14px 18px;
+	box-shadow: 0 8px 20px rgba(14, 116, 144, 0.3);
+	writing-mode: vertical-rl;
+	letter-spacing: 0.2em;
+}
+
+.crs-arrow {
+	color: #c9cdd6;
+	font-size: 20px;
+}
+
+.crs-course {
+	font-size: 13px;
+	color: #374151;
+	background: #f6f7f9;
+	border-radius: 8px;
+	padding: 7px 12px;
+	text-align: center;
+}
+
+.crs-flow-col.post .crs-course {
+	color: #0e7490;
+	background: color-mix(in srgb, #0e7490 7%, #fff);
+}
+
+/* ── 教材与实验 ───────────────────────────── */
+.crs-books {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+	gap: 12px;
+	margin-bottom: 18px;
+}
+
+.crs-book {
+	border: 1px solid #e5e7eb;
+	border-radius: 12px;
+	padding: 16px 18px;
+}
+
+.crs-book h3 {
+	margin: 0 0 6px;
+	font-size: 14.5px;
+}
+
+.crs-book-meta {
+	margin: 0 0 8px;
+	font-size: 12px;
+	color: #0e7490;
+}
+
+.crs-book > p:last-child {
+	margin: 0;
+	font-size: 12.5px;
+	color: #6b7280;
+	line-height: 1.7;
+}
+
+.crs-labs {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: 10px;
+}
+
+.crs-labs li {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	background: #fafbfc;
+	border: 1px solid #f0f1f4;
+	border-radius: 10px;
+	padding: 12px 16px;
+	font-size: 13px;
+}
+
+.crs-labs b {
+	font-weight: 650;
+}
+
+.crs-labs span {
+	color: #6b7280;
+	font-size: 12.5px;
+}
+
+/* ── 页脚 ─────────────────────────────────── */
+.crs-page .foot {
+	margin-top: 30px;
+	padding-top: 18px;
+	border-top: 1px solid #e5e7eb;
+	font-size: 12.5px;
+	color: #9ca3af;
+	line-height: 1.9;
+}
+
+/* ── 响应式 ───────────────────────────────── */
+@media (max-width: 820px) {
+	.crs-flow {
+		grid-template-columns: 1fr;
+	}
+
+	.crs-flow-mid {
+		flex-direction: row;
+		padding: 4px 0;
+	}
+
+	.crs-core {
+		writing-mode: horizontal-tb;
+		letter-spacing: 0.1em;
+	}
+
+	.crs-block {
+		padding: 22px 18px;
+	}
+}
+
+/* ── 专业群卡片（人工智能页） ─────────────── */
+.crs-sub {
+	margin: 26px 0 14px;
+	font-size: 16px;
+}
+
+.crs-majorlist {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 12px;
+	margin-bottom: 22px;
+}
+
+.crs-majorcard {
+	border: 1px solid #e5e7eb;
+	border-radius: 12px;
+	padding: 16px 18px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.crs-majorcard.wide {
+	grid-column: span 2;
+}
+
+.crs-majorcard b {
+	font-size: 15px;
+}
+
+.crs-majorcard span {
+	font-size: 12px;
+	color: #6b7280;
+	font-variant-numeric: tabular-nums;
+}
+
+.crs-majorcard em {
+	font-style: normal;
+	font-size: 12px;
+	color: #9ca3af;
+	line-height: 1.6;
+}
+
+.crs-catbars {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	margin: 4px 0;
+}
+
+.crs-catrow {
+	display: grid;
+	grid-template-columns: 56px 1fr 26px;
+	gap: 8px;
+	align-items: center;
+	font-size: 12px;
+	color: #6b7280;
+}
+
+.crs-catrow i {
+	display: block;
+	height: 9px;
+	border-radius: 999px;
+	background: linear-gradient(90deg, #a78bfa, #6d28d9);
+}
+
+.crs-catrow b {
+	text-align: right;
+	color: #374151;
+	font-variant-numeric: tabular-nums;
+}
+
+.crs-table td.crs-note-row {
+	text-align: center;
+	color: #9ca3af;
+	font-size: 12.5px;
+	padding: 12px 10px;
+}
+
+@media (max-width: 820px) {
+	.crs-majorcard.wide {
+		grid-column: auto;
+	}
+}

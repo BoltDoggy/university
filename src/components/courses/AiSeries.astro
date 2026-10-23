@@ -1,0 +1,32 @@
+---
+/** 人工智能课程系列导航（当前页高亮） */
+interface Props {
+	current: string;
+}
+const { current } = Astro.props;
+
+const items = [
+	{ name: '人工智能', href: '/courses/ai/' },
+	{ name: '机器学习导论', href: '/courses/ml/' },
+	{ name: '深度学习', href: '/courses/dl/' },
+	{ name: '强化学习', href: '/courses/rl/' },
+	{ name: '自然语言处理', href: '/courses/nlp/' },
+	{ name: '对话系统', href: '/courses/dialog/' },
+	{ name: '大模型技术', href: '/courses/llm/' },
+	{ name: '大模型与智能体', href: '/courses/agent/' },
+	{ name: 'AI 应用工程', href: '/courses/app-eng/' },
+	{ name: 'AI 产品工程', href: '/courses/prod-eng/' },
+	{ name: 'AI 产品实践', href: '/courses/practice/' },
+	{ name: '自动决策系统', href: '/courses/decision/' },
+	{ name: '课程图谱', href: '/courses/map/' },
+];
+---
+
+<nav class="crs-series" aria-label="人工智能课程系列导航">
+	<span class="crs-series-label">AI 课程系列</span>
+	{items.map((it) => (
+		<a href={it.href} class={it.name === current ? 'on' : ''} aria-current={it.name === current ? 'page' : undefined}>
+			{it.name}
+		</a>
+	))}
+</nav>
