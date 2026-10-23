@@ -2,8 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import catalog from '../data/majors-2026.json';
 import { DATA } from '../data/industry.js';
+import occupations from '../data/occupations-2022.json';
 
 const { meta } = DATA;
+const occYear = occupations.edition.replace('年版', '');
 ---
 
 <Layout>
@@ -36,6 +38,20 @@ const { meta } = DATA;
 					小类
 				</p>
 				<span class="go">浏览分类 →</span>
+			</a>
+			<a class="card" href="/occupations">
+				<p class="source">人力资源和社会保障部 · 2022 年 9 月发布</p>
+				<h2>
+					{occupations.title}<span class="badge">{occYear}</span>
+				</h2>
+				<p class="desc">
+					大类—中类—小类—职业（细类）四级结构，支持按名称与代码检索；绿色职业（L）与数字职业（S）逐项标注。
+				</p>
+				<p class="stats">
+					{occupations.stats.categories} 大类 · {occupations.stats.middles} 中类 · {occupations.stats.minors}
+					小类 · {occupations.stats.occupations} 职业
+				</p>
+				<span class="go">浏览大典 →</span>
 			</a>
 		</div>
 	</main>

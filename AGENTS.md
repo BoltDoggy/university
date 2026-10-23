@@ -4,15 +4,16 @@ Astro site visualizing Chinese national reference datasets:
 
 - `/majors` — 2026 本科专业目录 (883 undergraduate majors), data from `src/data/majors-2026.json`
 - `/industry` — 国民经济行业分类 (GB/T 4754—2017), data from `src/data/industry.js` (exports `DATA`)
+- `/occupations` — 职业分类大典 (2022 年版, 8/79/450/1639), data from `src/data/occupations-2022.json`
 
 ## Structure
 
-- `src/pages/` — routes: `index.astro`, `majors.astro`, `industry.astro`（薄页面：静态 hero/footer + island）
+- `src/pages/` — routes: `index.astro`, `majors.astro`, `industry.astro`, `occupations.astro`（薄页面：静态 hero/footer + island）
 - `src/layouts/Layout.astro` — shared HTML shell; pages pass `title`, content is Chinese (`lang="zh-CN"`)
-- `src/components/majors/`, `src/components/industry/` — React island 组件（`client:visible` 挂载），交互逻辑集中在 island 内，数据由组件直接 import `src/data/`（避免 props 序列化）
-- `src/styles/` — 页面级全局 CSS，按页面前缀命名（`majors-*.css` 用 `.mj-page` 命名空间，`industry-*.css` 用 `.ind-page`）；React 渲染的 DOM 不受 Astro scoped style 影响，必须用这些全局样式
+- `src/components/majors/`, `src/components/industry/`, `src/components/occupations/` — React island 组件（`client:visible` 挂载），交互逻辑集中在 island 内，数据由组件直接 import `src/data/`（避免 props 序列化）
+- `src/styles/` — 页面级全局 CSS，按页面前缀命名（`majors-*.css` 用 `.mj-page` 命名空间，`industry-*.css` 用 `.ind-page`，`occupations-*.css` 用 `.occ-page`）；React 渲染的 DOM 不受 Astro scoped style 影响，必须用这些全局样式
 - `src/data/` — datasets imported directly by pages (JSON import / named ESM export)
-- `.input/` — raw source material only (official PDF, extracted JSON, `pdf_to_json.py` extraction script); not imported by the app — treat as read-only inputs
+- `.input/` — raw source material only (official PDF, extracted JSON, `pdf_to_json.py` / `occupation_pdf_to_json.py` extraction scripts); not imported by the app — treat as read-only inputs
 
 ## Development
 

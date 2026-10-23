@@ -1,0 +1,61 @@
+---
+import Layout from '../layouts/Layout.astro';
+import OccupationsExplorer from '../components/occupations/OccupationsExplorer';
+import { catColor, occCount, type MajorCategory } from '../components/occupations/shared';
+import '../styles/occupations-base.css';
+import '../styles/occupations-catalog.css';
+import catalog from '../data/occupations-2022.json';
+
+const categories = catalog.categories as MajorCategory[];
+const stats = catalog.stats as {
+	categories: number;
+	middles: number;
+	minors: number;
+	occupations: number;
+	green_occupations: number;
+	digital_occupations: number;
+};
+
+// 各大类在顶部占比条中的区段（硬分段，宽度与职业数量成正比）
+let acc = 0;
+const spectrumStops = categories
+	.map((c) => {
+		const start = (acc / stats.occupations) * 100;
+		acc += occCount(c);
+		const end = (acc / stats.occupations) * 100;
+		return `${catColor[c.code]} ${start.toFixed(2)}% ${end.toFixed(2)}%`;
+	})
+	.join(', ');
+---
+
+<Layout title="中华人民共和国职业分类大典（2022 年版）· 可视化">
+	<div class="occ-page">
+		<header class="hero">
+			<div
+				class="spectrum"
+				style={`background: linear-gradient(90deg, ${spectrumStops})`}
+				title="各大类职业数量占比"
+			></div>
+			<p class="kicker">人力资源和社会保障部发布 · 2022 年 9 月</p>
+			<h1>中华人民共和国职业分类大典<span class="year">2022</span></h1>
+			<p class="sub">
+				国家职业的结构化分类标准，按大类—中类—小类—职业（细类）四级划分。点击左侧大类快速定位，支持按职业名称或代码搜索。
+			</p>
+			<ul class="stat-chips">
+				<li><b>{stats.categories}</b><span>大类</span></li>
+				<li><b>{stats.middles}</b><span>中类</span></li>
+				<li><b>{stats.minors}</b><span>小类</span></li>
+				<li><b>{stats.occupations}</b><span>职业（细类）</span></li>
+				<li><b class="l">{stats.green_occupations}</b><span>绿色职业 L</span></li>
+				<li><b class="s">{stats.digital_occupations}</b><span>数字职业 S</span></li>
+			</ul>
+		</header>
+
+		<OccupationsExplorer client:visible />
+
+		<footer class="foot">
+			数据来源：人力资源和社会保障部《中华人民共和国职业分类大典（2022 年版）》（2022 年 9 月发布）。职业名后标 L 为绿色职业、S
+			为数字职业、L/S 为两者皆是；部分「其他」小类在体系分类表中未列出职业。
+		</footer>
+	</div>
+</Layout>
