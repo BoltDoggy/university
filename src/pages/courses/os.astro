@@ -1,4 +1,5 @@
 ---
+import { BASE } from '../../utils/base';
 import Layout from '../../layouts/Layout.astro';
 import OsStandard from '../../components/os/OsStandard.astro';
 import OsIntro from '../../components/os/OsIntro.astro';
@@ -9,7 +10,7 @@ import '../../styles/course-content.css';
 <Layout title="操作系统 · 课程介绍">
 	<div class="crs-page">
 		<header class="hero">
-			<p class="kicker">计算机类（0809）· 学科基础核心知识领域 · <a href="/core-courses/">核心课程可视化</a></p>
+			<p class="kicker">计算机类（0809）· 学科基础核心知识领域 · <a href={BASE + 'core-courses/'}>核心课程可视化</a></p>
 			<h1>操作系统<span class="en">Operating Systems</span></h1>
 			<p class="sub">
 				在国标核心课程示例中覆盖计算机类全部 5 个专业的每一份方案——是并列六大知识领域里当之无愧的「共同地基」。

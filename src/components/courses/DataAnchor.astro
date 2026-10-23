@@ -1,4 +1,5 @@
 ---
+import { BASE } from '../../utils/base';
 import coreCourses from '../../data/core-courses.json';
 import majorsCatalog from '../../data/majors-2026.json';
 
@@ -63,7 +64,7 @@ for (const cat of majorsCatalog.categories) {
 	</div>
 
 	<div class="crs-majorlist">
-		<a class="crs-anchorcard" href="/courses/ai/">
+		<a class="crs-anchorcard" href={BASE + 'courses/ai/'}>
 			<b>人工智能 ↗</b>
 			<span>{anchors[0]?.code} 计算机科学与技术 · {anchors[0]?.ex} · {anchors[0]?.h} 学时</span>
 			<em>国标中与本课最近的课程锚点，对应「智能技术」知识领域——本系列课程的共同起点</em>
@@ -82,6 +83,6 @@ for (const cat of majorsCatalog.categories) {
 
 	<p class="crs-fine">
 		统计依据：`src/data/core-courses.json`（国标附录 30 份示例）与《普通高等学校本科专业目录（2026 年）》。
-		完整示例见<a href="/core-courses/">核心课程可视化</a>。
+		完整示例见<a href={BASE + 'core-courses/'}>核心课程可视化</a>。
 	</p>
 </section>

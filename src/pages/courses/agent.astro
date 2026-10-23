@@ -1,4 +1,5 @@
 ---
+import { BASE } from '../../utils/base';
 import Layout from '../../layouts/Layout.astro';
 import AiSeries from '../../components/courses/AiSeries.astro';
 import DataAnchor from '../../components/courses/DataAnchor.astro';
@@ -12,7 +13,7 @@ import '../../styles/course-series.css';
 <Layout title="大模型与智能体 · 课程介绍">
 	<div class="crs-page">
 		<header class="hero">
-			<p class="kicker">人工智能课程生态 · 进阶系列 · <a href="/courses/ai/">人工智能</a></p>
+			<p class="kicker">人工智能课程生态 · 进阶系列 · <a href={BASE + 'courses/ai/'}>人工智能</a></p>
 			<h1>大模型与智能体<span class="en">LLMs and Agents</span></h1>
 			<p class="sub">
 				以大模型为引擎构建自主完成任务的 AI 系统：提示工程、RAG、工具调用、规划记忆与多智能体协作。

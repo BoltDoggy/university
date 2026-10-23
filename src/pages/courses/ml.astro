@@ -1,4 +1,5 @@
 ---
+import { BASE } from '../../utils/base';
 import Layout from '../../layouts/Layout.astro';
 import AiSeries from '../../components/courses/AiSeries.astro';
 import DataAnchor from '../../components/courses/DataAnchor.astro';
@@ -12,7 +13,7 @@ import '../../styles/course-series.css';
 <Layout title="机器学习导论 · 课程介绍">
 	<div class="crs-page">
 		<header class="hero">
-			<p class="kicker">人工智能课程生态 · 进阶系列 · <a href="/courses/ai/">人工智能</a></p>
+			<p class="kicker">人工智能课程生态 · 进阶系列 · <a href={BASE + 'courses/ai/'}>人工智能</a></p>
 			<h1>机器学习导论<span class="en">Introduction to Machine Learning</span></h1>
 			<p class="sub">
 				从数学基础通往 AI 应用的第一门硬课：线性模型、决策树、支持向量机、无监督学习到神经网络基础，

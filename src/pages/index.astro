@@ -1,4 +1,5 @@
 ---
+import { BASE } from '../utils/base';
 import Layout from '../layouts/Layout.astro';
 import majors from '../data/majors-2026.json';
 import { DATA as industry } from '../data/industry.js';
@@ -28,7 +29,7 @@ interface DatasetCard {
 
 const datasets: DatasetCard[] = [
 	{
-		href: '/majors',
+		href: BASE + 'majors',
 		accent: '#4f46e5',
 		source: `${majors.publisher} · ${majors.publish_date}发布`,
 		badge: String(majors.year),
@@ -42,7 +43,7 @@ const datasets: DatasetCard[] = [
 		go: '浏览目录',
 	},
 	{
-		href: '/industry',
+		href: BASE + 'industry',
 		accent: '#0284c7',
 		source: `${meta.standard} · ${meta.effective} 实施`,
 		badge: meta.standard.split('—')[1],
@@ -57,7 +58,7 @@ const datasets: DatasetCard[] = [
 		go: '浏览分类',
 	},
 	{
-		href: '/core-courses',
+		href: BASE + 'core-courses',
 		accent: '#0e7490',
 		source: '教育部教学指导委员会 · 高等教育出版社 2018',
 		badge: '国标',
@@ -71,7 +72,7 @@ const datasets: DatasetCard[] = [
 		go: '查看课程',
 	},
 	{
-		href: '/occupations',
+		href: BASE + 'occupations',
 		accent: '#b45309',
 		source: `人力资源和社会保障部 · ${occupations.edition}`,
 		badge: occupations.edition.replace('年版', ''),
@@ -89,20 +90,20 @@ const datasets: DatasetCard[] = [
 
 /** 课程解读页入口（临时：未全部接入 /core-courses 深链的课程在此统一露出） */
 const courseEntries: { name: string; href: string; tag: string }[] = [
-	{ name: '操作系统', href: '/courses/os/', tag: '国标' },
-	{ name: '人工智能', href: '/courses/ai/', tag: '国标' },
-	{ name: '机器学习导论', href: '/courses/ml/', tag: 'AI 系列' },
-	{ name: '深度学习', href: '/courses/dl/', tag: 'AI 系列' },
-	{ name: '强化学习', href: '/courses/rl/', tag: 'AI 系列' },
-	{ name: '自然语言处理', href: '/courses/nlp/', tag: 'AI 系列' },
-	{ name: '对话系统', href: '/courses/dialog/', tag: 'AI 系列' },
-	{ name: '大模型技术', href: '/courses/llm/', tag: 'AI 系列' },
-	{ name: '大模型与智能体', href: '/courses/agent/', tag: 'AI 系列' },
-	{ name: 'AI 应用工程', href: '/courses/app-eng/', tag: 'AI 系列' },
-	{ name: 'AI 产品工程', href: '/courses/prod-eng/', tag: 'AI 系列' },
-	{ name: 'AI 产品实践', href: '/courses/practice/', tag: 'AI 系列' },
-	{ name: '自动决策系统', href: '/courses/decision/', tag: 'AI 系列' },
-	{ name: '课程图谱', href: '/courses/map/', tag: '总览' },
+	{ name: '操作系统', href: BASE + 'courses/os/', tag: '国标' },
+	{ name: '人工智能', href: BASE + 'courses/ai/', tag: '国标' },
+	{ name: '机器学习导论', href: BASE + 'courses/ml/', tag: 'AI 系列' },
+	{ name: '深度学习', href: BASE + 'courses/dl/', tag: 'AI 系列' },
+	{ name: '强化学习', href: BASE + 'courses/rl/', tag: 'AI 系列' },
+	{ name: '自然语言处理', href: BASE + 'courses/nlp/', tag: 'AI 系列' },
+	{ name: '对话系统', href: BASE + 'courses/dialog/', tag: 'AI 系列' },
+	{ name: '大模型技术', href: BASE + 'courses/llm/', tag: 'AI 系列' },
+	{ name: '大模型与智能体', href: BASE + 'courses/agent/', tag: 'AI 系列' },
+	{ name: 'AI 应用工程', href: BASE + 'courses/app-eng/', tag: 'AI 系列' },
+	{ name: 'AI 产品工程', href: BASE + 'courses/prod-eng/', tag: 'AI 系列' },
+	{ name: 'AI 产品实践', href: BASE + 'courses/practice/', tag: 'AI 系列' },
+	{ name: '自动决策系统', href: BASE + 'courses/decision/', tag: 'AI 系列' },
+	{ name: '课程图谱', href: BASE + 'courses/map/', tag: '总览' },
 ];
 ---
 

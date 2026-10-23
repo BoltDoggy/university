@@ -1,4 +1,5 @@
 ---
+import { BASE } from '../../utils/base';
 import Layout from '../../layouts/Layout.astro';
 import AiSeries from '../../components/courses/AiSeries.astro';
 import DataAnchor from '../../components/courses/DataAnchor.astro';
@@ -12,7 +13,7 @@ import '../../styles/course-series.css';
 <Layout title="强化学习 · 课程介绍">
 	<div class="crs-page">
 		<header class="hero">
-			<p class="kicker">人工智能课程生态 · 进阶系列 · <a href="/courses/ai/">人工智能</a></p>
+			<p class="kicker">人工智能课程生态 · 进阶系列 · <a href={BASE + 'courses/ai/'}>人工智能</a></p>
 			<h1>强化学习<span class="en">Reinforcement Learning</span></h1>
 			<p class="sub">
 				从 AlphaGo 到大模型对齐（RLHF）的决策学习范式：智能体在试错与奖励中学会最优决策。

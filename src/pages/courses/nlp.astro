@@ -1,4 +1,5 @@
 ---
+import { BASE } from '../../utils/base';
 import Layout from '../../layouts/Layout.astro';
 import AiSeries from '../../components/courses/AiSeries.astro';
 import DataAnchor from '../../components/courses/DataAnchor.astro';
@@ -12,7 +13,7 @@ import '../../styles/course-series.css';
 <Layout title="自然语言处理 · 课程介绍">
 	<div class="crs-page">
 		<header class="hero">
-			<p class="kicker">人工智能课程生态 · 进阶系列 · <a href="/courses/ai/">人工智能</a></p>
+			<p class="kicker">人工智能课程生态 · 进阶系列 · <a href={BASE + 'courses/ai/'}>人工智能</a></p>
 			<h1>自然语言处理<span class="en">Natural Language Processing</span></h1>
 			<p class="sub">
 				让机器理解与生成人类语言：从分词、词向量到 Transformer，再到被大语言模型统一的生成范式。

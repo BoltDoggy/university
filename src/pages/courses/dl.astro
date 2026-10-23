@@ -1,4 +1,5 @@
 ---
+import { BASE } from '../../utils/base';
 import Layout from '../../layouts/Layout.astro';
 import AiSeries from '../../components/courses/AiSeries.astro';
 import DataAnchor from '../../components/courses/DataAnchor.astro';
@@ -12,7 +13,7 @@ import '../../styles/course-series.css';
 <Layout title="深度学习 · 课程介绍">
 	<div class="crs-page">
 		<header class="hero">
-			<p class="kicker">人工智能课程生态 · 进阶系列 · <a href="/courses/ai/">人工智能</a></p>
+			<p class="kicker">人工智能课程生态 · 进阶系列 · <a href={BASE + 'courses/ai/'}>人工智能</a></p>
 			<h1>深度学习<span class="en">Deep Learning</span></h1>
 			<p class="sub">
 				驱动本轮 AI 浪潮的技术内核：多层感知机、卷积网络、序列模型、Transformer 与预训练，

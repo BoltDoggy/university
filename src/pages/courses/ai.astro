@@ -1,4 +1,5 @@
 ---
+import { BASE } from '../../utils/base';
 import Layout from '../../layouts/Layout.astro';
 import AiStandard from '../../components/ai/AiStandard.astro';
 import AiIntro from '../../components/ai/AiIntro.astro';
@@ -21,7 +22,7 @@ for (const cat of majorsCatalog.categories) {
 <Layout title="人工智能 · 课程介绍">
 	<div class="crs-page">
 		<header class="hero">
-			<p class="kicker">计算机类（0809）· 专业知识课程 · <a href="/core-courses/">核心课程可视化</a></p>
+			<p class="kicker">计算机类（0809）· 专业知识课程 · <a href={BASE + 'core-courses/'}>核心课程可视化</a></p>
 			<h1>人工智能<span class="en">Artificial Intelligence</span></h1>
 			<p class="sub">
 				国标课程示例中它是计算机科学与技术专业的一份方向课（48 学时），对应「智能技术」知识领域；

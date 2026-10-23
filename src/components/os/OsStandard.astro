@@ -1,4 +1,5 @@
 ---
+import { BASE } from '../../utils/base';
 import coreCourses from '../../data/core-courses.json';
 
 /** 国标数据：计算机类 + 电子信息类中「操作系统」的出现情况（含名称变体） */
@@ -99,6 +100,6 @@ const common = csCls.common as string[];
 
 	<p class="crs-fine">
 		依据计算机类学分结构：理论课程 16 学时计 1 学分；信息安全专业课程名强调「原理及安全」，教学内容还覆盖操作系统安全机制。
-		完整的计算机类与电子信息类课程示例清单见<a href="/core-courses/">核心课程可视化</a>。
+		完整的计算机类与电子信息类课程示例清单见<a href={BASE + 'core-courses/'}>核心课程可视化</a>。
 	</p>
 </section>
