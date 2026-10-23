@@ -29,7 +29,7 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 - 代码单文件不得超过 300 行（手写代码 `.astro`/`.ts`/`.js` 等）。超出时拆分为组件或提取样式/工具模块；`src/data/` 与 `.input/` 中的机器生成数据文件不受此限制
 - Package manager is pnpm (`pnpm-lock.yaml`); Node >= 22.23.4
 - React 集成：`@astrojs/react`（配置在 `astro.config.mjs`，JSX 设置在 `tsconfig.json`）；island 一律 `client:visible`
-- TypeScript strict mode via `astro/tsconfigs/strict`; typecheck with `pnpm typecheck`（`astro check`，需 TypeScript 6 —— TS 7 尚不被 `@astrojs/check` 支持）
+- TypeScript strict mode via `astro/tsconfigs/strict`; typecheck with `pnpm typecheck`（`tsc --noEmit --runExternalCode`，经 `@astrojs/ts-content-mapper` 支持 `.astro` 文件；需 TypeScript 7.1+，`astro check` 已废弃不再使用）
 - Data files in `src/data/` are machine-generated single-line files (`industry.js` is ~800KB+) — never reformat or hand-edit them; modify programmatically or regenerate
 - `industry.js` uses short field names: `c` code, `n` name, `d` description, `ch` children
 - Dataset TypeScript interfaces are declared in page frontmatter (see `Major`/`Category` in `src/pages/majors.astro`)
