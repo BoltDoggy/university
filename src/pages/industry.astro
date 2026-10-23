@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import IndustryApp from '../components/industry/IndustryApp';
+import '../styles/industry-base.css';
+import '../styles/industry-sunburst.css';
+import '../styles/industry-compare.css';
+import '../styles/industry-explorer.css';
+import { DATA } from '../data/industry.js';
+
+const { meta } = DATA;
+---
+
+<Layout title={`${meta.title} · ${meta.standard}`}>
+	<main class="ind-page">
+		<!-- ===== Hero ===== -->
+		<header class="hero">
+			<div class="hero-glow g1"></div>
+			<div class="hero-glow g2"></div>
+			<div class="hero-inner">
+				<p class="hero-eyebrow">National Economic Industry Classification</p>
+				<h1>{meta.title}</h1>
+				<p class="hero-sub">
+					<span class="std">{meta.standard}</span>
+					<span class="chip">代替 {meta.replaces}</span>
+					<span class="chip">发布 {meta.issued}</span>
+					<span class="chip">实施 {meta.effective}</span>
+				</p>
+				<div class="hero-stats">
+					<div class="stat"><b>{meta.counts.men}</b><span>门类</span></div>
+					<div class="stat"><b>{meta.counts.da}</b><span>大类</span></div>
+					<div class="stat"><b>{meta.counts.zhong}</b><span>中类</span></div>
+					<div class="stat"><b>{meta.counts.xiao}</b><span>小类</span></div>
+				</div>
+			</div>
+		</header>
+
+		<!-- 旭日图 / 新旧对比 / 分类浏览器(React island) -->
+		<IndustryApp client:visible />
+
+		<footer class="foot">
+			数据依据 {meta.standard}({meta.issued} 发布,{meta.effective} 实施),共 {meta.counts.men} 门类、{meta.counts.da}
+			大类、{meta.counts.zhong} 中类、{meta.counts.xiao} 小类。
+		</footer>
+	</main>
+</Layout>

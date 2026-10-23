@@ -1,0 +1,44 @@
+/* 行业分类页:旭日图与图例 */
+.sunburst-wrap { display: flex; gap: 26px; align-items: center; flex-wrap: wrap; }
+.sb-chart { position: relative; flex: 1 1 420px; max-width: 560px; margin: 0 auto; }
+.sb-chart svg { width: 100%; height: auto; display: block; }
+.sb-arc { cursor: pointer; stroke: #fff; stroke-width: 1; transition: opacity 0.18s; }
+.sb-arc.dim { opacity: 0.18; }
+.sb-arc-label { font-size: 15px; font-weight: 700; fill: #fff; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+.sb-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 168px; text-align: center; pointer-events: none; }
+.sb-center-level { font-size: 11px; color: var(--muted); letter-spacing: 0.14em; }
+.sb-center-code { font-size: 30px; font-weight: 700; line-height: 1.25; word-break: break-all; }
+.sb-center-name {
+	font-size: 13px;
+	line-height: 1.45;
+	color: var(--ink);
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+.sb-center-sub { margin-top: 4px; font-size: 11.5px; color: var(--muted); }
+.sb-legend { flex: 1 1 300px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 14px; align-self: stretch; align-content: center; }
+.sb-legend-item {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	padding: 5px 8px;
+	border: 0;
+	background: none;
+	border-radius: 8px;
+	cursor: pointer;
+	font: inherit;
+	font-size: 12.5px;
+	color: var(--ink);
+	text-align: left;
+}
+.sb-legend-item:hover, .sb-legend-item.hl { background: #eef0f8; }
+.sb-legend-item .dot { width: 9px; height: 9px; border-radius: 3px; flex: none; }
+.sb-legend-item b { width: 14px; flex: none; font-size: 12.5px; }
+.lg-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lg-count { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+@media (max-width: 860px) {
+	.sb-legend { grid-template-columns: 1fr; }
+}

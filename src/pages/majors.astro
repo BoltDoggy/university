@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+import MajorsExplorer from '../components/majors/MajorsExplorer';
+import { catColor, groupsOf, majorCount, type Category } from '../components/majors/shared';
+import '../styles/majors-base.css';
+import '../styles/majors-catalog.css';
+import catalog from '../data/majors-2026.json';
+
+const categories = catalog.categories as Category[];
+const stats = catalog.stats as { categories: number; classes: number; majors: number };
+
+const allMajors = categories.flatMap((c) => groupsOf(c).flatMap((g) => g.majors));
+const nSpecial = allMajors.filter((m) => m.is_special).length;
+const nControlled = allMajors.filter((m) => m.is_state_controlled).length;
+const nNoted = allMajors.filter((m) => m.note).length;
+
+// 各门类在顶部占比条中的区段（硬分段，宽度与专业数量成正比）
+let acc = 0;
+const spectrumStops = categories
+	.map((c) => {
+		const start = (acc / allMajors.length) * 100;
+		acc += majorCount(c);
+		const end = (acc / allMajors.length) * 100;
+		return `${catColor[c.code]} ${start.toFixed(2)}% ${end.toFixed(2)}%`;
+	})
+	.join(', ');
+---
+
+<Layout title="普通高等学校本科专业目录（2026 年）· 可视化">
+	<div class="mj-page">
+		<header class="hero">
+			<div
+				class="spectrum"
+				style={`background: linear-gradient(90deg, ${spectrumStops})`}
+				title="各学科门类专业数量占比"
+			></div>
+			<p class="kicker">教育部发布 · 2026 年 4 月</p>
+			<h1>普通高等学校本科专业目录<span class="year">2026</span></h1>
+			<p class="sub">
+				高等教育工作的基本指导性文件之一，规定专业划分、名称及所属门类。点击左侧门类快速定位，支持按专业名称或代码搜索。
+			</p>
+			<ul class="stat-chips">
+				<li><b>{stats.categories}</b><span>学科门类</span></li>
+				<li><b>{stats.classes}</b><span>专业类</span></li>
+				<li><b>{stats.majors}</b><span>专业</span></li>
+				<li><b class="t">{nSpecial}</b><span>特设专业 T</span></li>
+				<li><b class="k">{nControlled}</b><span>国家控制布点 K</span></li>
+				<li><b class="note">{nNoted}</b><span>含学位备注</span></li>
+			</ul>
+		</header>
+
+		<MajorsExplorer client:visible />
+
+		<footer class="foot">
+			数据来源：教育部《普通高等学校本科专业目录（2026 年）》（2026 年 4 月发布）。备注中「原专业代码」指调整前所属代码。
+		</footer>
+	</div>
+</Layout>

@@ -1,11 +1,134 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import catalog from '../data/majors-2026.json';
+import { DATA } from '../data/industry.js';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const { meta } = DATA;
 ---
 
 <Layout>
-	<Welcome />
+	<main class="hub">
+		<header class="head">
+			<h1>国家参考数据可视化</h1>
+			<p class="sub">常用国家标准与目录的可视化浏览与检索工具，数据集持续扩充。</p>
+		</header>
+		<div class="grid">
+			<a class="card" href="/majors">
+				<p class="source">{catalog.publisher} · {catalog.publish_date}发布</p>
+				<h2>
+					{catalog.title}<span class="badge">{catalog.year}</span>
+				</h2>
+				<p class="desc">
+					学科门类—专业类—专业三级结构，支持按名称与代码检索；特设专业（T）与国家控制布点专业（K）逐项标注。
+				</p>
+				<p class="stats">
+					{catalog.stats.categories} 学科门类 · {catalog.stats.classes} 专业类 · {catalog.stats.majors}
+					专业
+				</p>
+				<span class="go">浏览目录 →</span>
+			</a>
+			<a class="card" href="/industry">
+				<p class="source">{meta.standard} · {meta.effective} 实施</p>
+				<h2>{meta.title}</h2>
+				<p class="desc">门类—大类—中类—小类四级分类，含各类目说明，支持按名称与代码检索。</p>
+				<p class="stats">
+					{meta.counts.men} 门类 · {meta.counts.da} 大类 · {meta.counts.zhong} 中类 · {meta.counts.xiao}
+					小类
+				</p>
+				<span class="go">浏览分类 →</span>
+			</a>
+		</div>
+	</main>
 </Layout>
+
+<style>
+	.hub {
+		min-height: 100vh;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 36px;
+		padding: 48px 24px;
+	}
+	.head {
+		text-align: center;
+	}
+	h1 {
+		margin: 0;
+		font-size: clamp(30px, 5vw, 40px);
+		letter-spacing: 0.02em;
+	}
+	.sub {
+		margin: 12px 0 0;
+		color: #4b5563;
+		line-height: 1.8;
+	}
+	.grid {
+		width: 100%;
+		max-width: 760px;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 20px;
+	}
+	.card {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		box-sizing: border-box;
+		background: #fff;
+		border: 1px solid #e5e7eb;
+		border-radius: 16px;
+		padding: 26px 26px 22px;
+		color: inherit;
+		text-decoration: none;
+		transition:
+			transform 0.15s,
+			box-shadow 0.15s,
+			border-color 0.15s;
+	}
+	.card:hover {
+		transform: translateY(-3px);
+		border-color: #c7cbd4;
+		box-shadow: 0 12px 28px rgba(28, 32, 36, 0.1);
+	}
+	.source {
+		margin: 0;
+		font-size: 13px;
+		letter-spacing: 0.02em;
+		color: #6b7280;
+	}
+	h2 {
+		margin: 0;
+		font-size: 22px;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+	.badge {
+		font-size: 12px;
+		font-weight: 600;
+		color: #4f46e5;
+		background: #eef0fe;
+		border-radius: 6px;
+		padding: 2px 7px;
+	}
+	.desc {
+		margin: 0;
+		flex: 1;
+		color: #4b5563;
+		font-size: 14px;
+		line-height: 1.8;
+	}
+	.stats {
+		margin: 0;
+		padding-top: 12px;
+		border-top: 1px solid #f0f1f4;
+		font-size: 13px;
+	}
+	.go {
+		font-size: 14px;
+		font-weight: 600;
+	}
+</style>
